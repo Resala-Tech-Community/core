@@ -1,22 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using resala.core.Domain.Repositories;
 using resala.core.Domain.Services;
 using resala.core.Persistence.Contexts;
 using resala.core.Persistence.Repositories;
 using resala.core.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace resala.core
 {
@@ -38,6 +31,9 @@ namespace resala.core
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "resala.core", Version = "v1" });
             });
+
+            services.AddAutoMapper(typeof(Startup));
+
 
             services.AddDbContext<AppDbContext>(options => {
                 options.UseInMemoryDatabase("resala-core-in-memory");
