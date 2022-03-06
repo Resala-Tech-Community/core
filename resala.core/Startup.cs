@@ -2,11 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using resala.core.Domain.Repositories;
+using resala.core.Domain.Services;
+using resala.core.Persistence.Contexts;
+using resala.core.Persistence.Repositories;
+using resala.core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +38,14 @@ namespace resala.core
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "resala.core", Version = "v1" });
             });
+
+            services.AddDbContext<AppDbContext>(options => {
+                options.UseInMemoryDatabase("resala-core-in-memory");
+            });
+
+            services.AddScoped<IVolunteerRepository, VolunteerRepository>();
+            services.AddScoped<IVolunteerService, VolunteerService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +68,7 @@ namespace resala.core
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
