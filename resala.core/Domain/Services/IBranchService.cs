@@ -1,4 +1,5 @@
 ﻿using resala.core.Domain.Models;
+using resala.core.Domain.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace resala.core.Domain.Services
     public interface IBranchService
     {
         Task<IEnumerable<Branch>> ListAsync();
+        Task<SaveResponse> SaveAsync(Branch branch);
+
     }
 }

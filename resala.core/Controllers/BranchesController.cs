@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using resala.core.Domain.Models;
 using resala.core.Domain.Services;
+using resala.core.Domain.Services.Communication;
+using resala.core.Extensions;
 using resala.core.Resources;
 using System;
 using System.Collections.Generic;
@@ -26,6 +28,24 @@ namespace resala.core.Controllers
         {
             IEnumerable<Branch> Branches =  await _branchService.ListAsync();
             return _mapper.Map<IEnumerable<Branch>, IEnumerable<BranchResource>>(Branches);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] AddBranchResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            Branch branch = _mapper.Map<AddBranchResource,Branch>(resource);
+
+            SaveResponse res = await _branchService.SaveAsync(branch);
+
+            if (!res.Success)
+                return BadRequest(res.Message);
+
+            BranchResource branchRes = _mapper.Map<Branch, BranchResource>(res.SavedModel as Branch);
+
+            return Ok(branchRes);
         }
 
     }

@@ -45,6 +45,9 @@ namespace resala.core
             services.AddScoped<IBranchRepository, BranchRepository>();
             services.AddScoped<IBranchService, BranchService>();
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

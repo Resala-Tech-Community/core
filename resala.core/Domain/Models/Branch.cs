@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace resala.core.Domain.Models
 {
-    public class Branch
+    public class Branch : BaseModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
