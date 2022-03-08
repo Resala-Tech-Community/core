@@ -21,9 +21,19 @@ namespace resala.core.Persistence.Repositories
             await _context.Branches.AddAsync(branch);
         }
 
+        public async Task<Branch> FindByIdAsync(int id)
+        {
+            return await _context.Branches.FindAsync(id);
+        }
+
         public async Task<IEnumerable<Branch>> ListAsync()
         {
             return await _context.Branches.ToListAsync();
+        }
+
+        public void Update(Branch branch)
+        {
+            _context.Branches.Update(branch);
         }
     }
 }

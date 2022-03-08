@@ -11,5 +11,8 @@ namespace resala.core.Domain.Repositories
     {
         Task<IEnumerable<Branch>> ListAsync();
         Task AddAsync(Branch branch);
+        Task<Branch> FindByIdAsync(int id);
+        void Update(Branch branch);
+
     }
 }

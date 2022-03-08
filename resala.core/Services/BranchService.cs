@@ -4,7 +4,6 @@ using resala.core.Domain.Services;
 using resala.core.Domain.Services.Communication;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace resala.core.Services
@@ -37,6 +36,28 @@ namespace resala.core.Services
             }catch(Exception e)
             {
                 return new SaveResponse($"Error while adding new branch instance: {e.Message}");
+            }
+        }
+
+        public async Task<SaveResponse> UpdateAsync(int id, Branch branch)
+        {
+            var existingCategory = await _branchRepoitory.FindByIdAsync(id);
+
+            if (existingCategory == null)
+                return new SaveResponse("Branch not found.");
+
+            existingCategory.Name = branch.Name;
+
+            try
+            {
+                _branchRepoitory.Update(existingCategory);
+                await _unitOfWork.CompleteAsync();
+
+                return new SaveResponse(existingCategory);
+            }
+            catch (Exception ex)
+            {
+                return new SaveResponse($"An error occurred when updating the branch: {ex.Message}");
             }
         }
     }

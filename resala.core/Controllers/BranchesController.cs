@@ -48,5 +48,24 @@ namespace resala.core.Controllers
             return Ok(branchRes);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAsync(int id, [FromBody] AddBranchResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            Branch branch = _mapper.Map<AddBranchResource, Branch>(resource);
+            SaveResponse result = await _branchService.UpdateAsync(id, branch);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            BranchResource branchResource = _mapper.Map<Branch, BranchResource>((Branch)result.SavedModel);
+
+            return Ok(branchResource);
+        }
+
+
+
     }
 }

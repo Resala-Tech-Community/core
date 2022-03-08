@@ -11,6 +11,6 @@ namespace resala.core.Domain.Services
     {
         Task<IEnumerable<Branch>> ListAsync();
         Task<SaveResponse> SaveAsync(Branch branch);
-
+        Task<SaveResponse> UpdateAsync(int id, Branch branch);
     }
 }
