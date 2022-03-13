@@ -31,6 +31,11 @@ namespace resala.core.Persistence.Repositories
             return await _context.Branches.ToListAsync();
         }
 
+        public void Remove(Branch branch)
+        {
+            _context.Branches.Remove(branch);
+        }
+
         public void Update(Branch branch)
         {
             _context.Branches.Update(branch);

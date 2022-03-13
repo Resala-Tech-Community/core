@@ -1,14 +1,18 @@
 ﻿using resala.core.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace resala.core.Resources
 {
-    public class VolunteerResource
+    public class AddVolunteerResources
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Gender { get; set; }
-        public BranchResource Branch { get; set; }
+
+        public Branch Branch { get; set; }
 
     }
 }

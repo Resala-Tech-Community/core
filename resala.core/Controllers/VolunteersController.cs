@@ -14,8 +14,7 @@ namespace resala.core.Controllers
     public class VolunteersController : BaseController
     {
         private readonly IVolunteerService _volunteerService;
-
-
+ 
         public VolunteersController(IVolunteerService volunteerService, IMapper _mapper): base(_mapper)
         {
             _volunteerService = volunteerService;
@@ -26,6 +25,24 @@ namespace resala.core.Controllers
         {
             IEnumerable<Volunteer> volunteers = await _volunteerService.ListAsync();
             return _mapper.Map<IEnumerable<Volunteer>, IEnumerable<VolunteerResource>>(volunteers);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] AddBranchResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            Branch branch = _mapper.Map<AddBranchResource, Branch>(resource);
+
+            ModelChangeResponse res = await _branchService.SaveAsync(branch);
+
+            if (!res.Success)
+                return BadRequest(res.Message);
+
+            BranchResource branchRes = _mapper.Map<Branch, BranchResource>(res.ChangedModel as Branch);
+
+            return Ok(branchRes);
         }
     }
 }

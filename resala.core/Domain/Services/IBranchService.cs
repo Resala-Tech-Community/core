@@ -10,7 +10,9 @@ namespace resala.core.Domain.Services
     public interface IBranchService
     {
         Task<IEnumerable<Branch>> ListAsync();
-        Task<SaveResponse> SaveAsync(Branch branch);
-        Task<SaveResponse> UpdateAsync(int id, Branch branch);
+        Task<ModelChangeResponse> SaveAsync(Branch branch);
+        Task<ModelChangeResponse> UpdateAsync(int id, Branch branch);
+        Task<ModelChangeResponse> DeleteAsync(int id);
+
     }
 }

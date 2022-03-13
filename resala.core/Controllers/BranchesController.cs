@@ -38,12 +38,12 @@ namespace resala.core.Controllers
 
             Branch branch = _mapper.Map<AddBranchResource,Branch>(resource);
 
-            SaveResponse res = await _branchService.SaveAsync(branch);
+            ModelChangeResponse res = await _branchService.SaveAsync(branch);
 
             if (!res.Success)
                 return BadRequest(res.Message);
 
-            BranchResource branchRes = _mapper.Map<Branch, BranchResource>(res.SavedModel as Branch);
+            BranchResource branchRes = _mapper.Map<Branch, BranchResource>(res.ChangedModel as Branch);
 
             return Ok(branchRes);
         }
@@ -55,17 +55,28 @@ namespace resala.core.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
 
             Branch branch = _mapper.Map<AddBranchResource, Branch>(resource);
-            SaveResponse result = await _branchService.UpdateAsync(id, branch);
+            ModelChangeResponse result = await _branchService.UpdateAsync(id, branch);
 
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            BranchResource branchResource = _mapper.Map<Branch, BranchResource>((Branch)result.SavedModel);
+            BranchResource branchResource = _mapper.Map<Branch, BranchResource>((Branch)result.ChangedModel);
 
             return Ok(branchResource);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            ModelChangeResponse result = await _branchService.DeleteAsync(id);
 
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var branchRes = _mapper.Map<Branch, BranchResource>((Branch)result.ChangedModel);
+
+            return Ok(branchRes);
+        }
 
     }
 }

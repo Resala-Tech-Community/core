@@ -18,7 +18,7 @@ namespace resala.core.Persistence.Repositories
 
         public async Task<IEnumerable<Volunteer>> ListAsync()
         {
-            return await _context.Volunteers.ToListAsync();
+            return await _context.Volunteers.Include(v=>v.Branch).ToListAsync();
         }
     }
 }

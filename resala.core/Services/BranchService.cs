@@ -19,45 +19,66 @@ namespace resala.core.Services
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<ModelChangeResponse> DeleteAsync(int id)
+        {
+            Branch existingBranch = await _branchRepoitory.FindByIdAsync(id);
+
+            if (existingBranch == null)
+                return new ModelChangeResponse("Branch not found.");
+
+            try
+            {
+                _branchRepoitory.Remove(existingBranch);
+                await _unitOfWork.CompleteAsync();
+
+                return new ModelChangeResponse(existingBranch);
+            }
+            catch (Exception ex)
+            {
+                // Do some logging stuff
+                return new ModelChangeResponse($"An error occurred when deleting the branch: {ex.Message}");
+            }
+        }
+
         public async Task<IEnumerable<Branch>> ListAsync()
         {
             return await _branchRepoitory.ListAsync();
         }
 
-        public async Task<SaveResponse> SaveAsync(Branch branch)
+        public async Task<ModelChangeResponse> SaveAsync(Branch branch)
         {
             try
             {
                 await _branchRepoitory.AddAsync(branch);
                 await _unitOfWork.CompleteAsync();
 
-                return new SaveResponse(branch);
+                return new ModelChangeResponse(branch);
 
             }catch(Exception e)
             {
-                return new SaveResponse($"Error while adding new branch instance: {e.Message}");
+                return new ModelChangeResponse($"Error while adding new branch instance: {e.Message}");
             }
         }
 
-        public async Task<SaveResponse> UpdateAsync(int id, Branch branch)
+        public async Task<ModelChangeResponse> UpdateAsync(int id, Branch branch)
         {
-            var existingCategory = await _branchRepoitory.FindByIdAsync(id);
+            var existingBranch = await _branchRepoitory.FindByIdAsync(id);
 
-            if (existingCategory == null)
-                return new SaveResponse("Branch not found.");
+            if (existingBranch == null)
+                return new ModelChangeResponse("Branch not found.");
 
-            existingCategory.Name = branch.Name;
+            existingBranch.Name = branch.Name;
 
             try
             {
-                _branchRepoitory.Update(existingCategory);
+                _branchRepoitory.Update(existingBranch);
                 await _unitOfWork.CompleteAsync();
 
-                return new SaveResponse(existingCategory);
+                return new ModelChangeResponse(existingBranch);
             }
             catch (Exception ex)
             {
-                return new SaveResponse($"An error occurred when updating the branch: {ex.Message}");
+                return new ModelChangeResponse($"An error occurred when updating the branch: {ex.Message}");
             }
         }
     }
