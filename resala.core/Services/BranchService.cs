@@ -1,7 +1,9 @@
-﻿using resala.core.Domain.Models;
+﻿using AutoMapper;
+using resala.core.Domain.Models;
 using resala.core.Domain.Repositories;
 using resala.core.Domain.Services;
 using resala.core.Domain.Services.Communication;
+using resala.core.Resources;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,11 +14,13 @@ namespace resala.core.Services
     {
         private readonly IBranchRepository _branchRepoitory;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public BranchService(IBranchRepository branchRepoitory, IUnitOfWork unitOfWork)
+        public BranchService(IBranchRepository branchRepoitory, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _branchRepoitory = branchRepoitory;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<ModelChangeResponse> DeleteAsync(int id)
@@ -49,6 +53,7 @@ namespace resala.core.Services
         {
             try
             {
+                
                 await _branchRepoitory.AddAsync(branch);
                 await _unitOfWork.CompleteAsync();
 
@@ -60,18 +65,18 @@ namespace resala.core.Services
             }
         }
 
-        public async Task<ModelChangeResponse> UpdateAsync(int id, Branch branch)
+        public async Task<ModelChangeResponse> UpdateAsync(int id, AddBranchResource branchReource)
         {
             var existingBranch = await _branchRepoitory.FindByIdAsync(id);
 
             if (existingBranch == null)
                 return new ModelChangeResponse("Branch not found.");
 
-            existingBranch.Name = branch.Name;
+            //TODO: Needs checking if this update the whole model even non-dirty fields or not
+            _mapper.Map(branchReource, existingBranch);
 
             try
             {
-                _branchRepoitory.Update(existingBranch);
                 await _unitOfWork.CompleteAsync();
 
                 return new ModelChangeResponse(existingBranch);

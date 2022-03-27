@@ -55,8 +55,8 @@ namespace resala.core.Persistence.Contexts
 
             builder.Entity<Branch>().HasData
                 (
-                    new Branch { Id = 100,Name="Maadi" },
-                    new Branch { Id = 101,Name="October" }
+                    new Branch { Id = 100,Name="Maadi" , Phone="01111111111" },
+                    new Branch { Id = 101,Name="October", Phone="02222222222" }
                 );
 
             builder.Entity<Volunteer>().HasData

@@ -16,9 +16,29 @@ namespace resala.core.Persistence.Repositories
 
         }
 
+        public Task AddAsync(Volunteer volunteer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Volunteer> FindByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Volunteer>> ListAsync()
         {
             return await _context.Volunteers.Include(v=>v.Branch).ToListAsync();
+        }
+
+        public void Remove(Volunteer volunteer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Volunteer volunteer)
+        {
+            throw new NotImplementedException();
         }
     }
 }

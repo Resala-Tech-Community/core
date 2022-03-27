@@ -9,5 +9,9 @@ namespace resala.core.Domain.Repositories
     public interface IVolunteerRepository
     {
         Task<IEnumerable<Volunteer>> ListAsync();
+        Task AddAsync(Volunteer volunteer);
+        Task<Volunteer> FindByIdAsync(int id);
+        void Update(Volunteer volunteer);
+        void Remove(Volunteer volunteer);
     }
 }

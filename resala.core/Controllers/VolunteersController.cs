@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using resala.core.Domain.Models;
 using resala.core.Domain.Services;
+using resala.core.Domain.Services.Communication;
+using resala.core.Extensions;
 using resala.core.Resources;
 using System;
 using System.Collections.Generic;
@@ -28,21 +30,51 @@ namespace resala.core.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] AddBranchResource resource)
+        public async Task<IActionResult> PostAsync([FromBody] AddVolunteerResources resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            Branch branch = _mapper.Map<AddBranchResource, Branch>(resource);
+            Volunteer volunteer = _mapper.Map<AddVolunteerResources, Volunteer>(resource);
 
-            ModelChangeResponse res = await _branchService.SaveAsync(branch);
+            ModelChangeResponse res = await _volunteerService.SaveAsync(volunteer);
 
             if (!res.Success)
                 return BadRequest(res.Message);
 
-            BranchResource branchRes = _mapper.Map<Branch, BranchResource>(res.ChangedModel as Branch);
+            VolunteerResource volResource = _mapper.Map<Volunteer, VolunteerResource>(res.ChangedModel as Volunteer);
 
-            return Ok(branchRes);
+            return Ok(volResource);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAsync(int id, [FromBody] AddVolunteerResources resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            Volunteer vol = _mapper.Map<AddVolunteerResources, Volunteer>(resource);
+            ModelChangeResponse result = await _volunteerService.UpdateAsync(id, vol);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            VolunteerResource volRes = _mapper.Map<Volunteer, VolunteerResource>(result.ChangedModel as Volunteer);
+
+            return Ok(volRes);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            ModelChangeResponse result = await _volunteerService.DeleteAsync(id);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var volRes = _mapper.Map<Volunteer, VolunteerResource>(result.ChangedModel as Volunteer);
+
+            return Ok(volRes);
         }
     }
 }
