@@ -23,40 +23,50 @@ namespace resala.core.Persistence.Contexts
 
             // Volunteers //
 
-            builder.Entity<Volunteer>()
-                .ToTable("Volunteers")
-                .HasKey(p => p.Id);
+            //builder.Entity<Volunteer>()
+            //    .ToTable("Volunteers")
+            //    .HasKey(p => p.Id);
 
-            builder.Entity<Volunteer>().Property(p => p.Id)
-                .IsRequired()
-                .ValueGeneratedOnAdd();
+            //builder.Entity<Volunteer>().Property(p => p.Id)
+            //    .IsRequired()
+            //    .ValueGeneratedOnAdd();
 
-            builder.Entity<Volunteer>().Property(p => p.Name)
-               .IsRequired()
-               .HasMaxLength(30);
+            //builder.Entity<Volunteer>().Property(p => p.Name)
+            //   .IsRequired()
+            //   .HasMaxLength(30);
 
-            builder.Entity<Volunteer>().Property(p => p.Phone).IsRequired();
+            //builder.Entity<Volunteer>().Property(p => p.Phone)
+            //    .IsRequired()
+            //    .HasMaxLength(11);
 
-            builder.Entity<Volunteer>().Property(p => p.Gender).IsRequired();
+            //builder.Entity<Volunteer>().Property(p => p.Gender).IsRequired();
 
-            builder.Entity<Volunteer>().HasOne(p => p.Branch).WithMany(b => b.Volunteers).HasForeignKey(v => v.BranchId);
 
-            // Branch //
+            //builder.Entity<Volunteer>().HasOne(p => p.Branch).WithMany(b => b.Volunteers).HasForeignKey(v => v.BranchId);
 
-            builder.Entity<Branch>()
-              .ToTable("Branches")
-              .HasKey(p => p.Id);
+            //builder.Entity<Volunteer>().HasOne(p => p.Committee).WithMany(b => b.Volunteers).HasForeignKey(v => v.CommitteeId);
 
-            builder.Entity<Branch>().Property(p => p.Id)
-              .IsRequired()
-              .ValueGeneratedOnAdd();
 
-            builder.Entity<Branch>().Property(p => p.Name).IsRequired();
+
+            //// Branch //
+
+            //builder.Entity<Branch>()
+            //  .ToTable("Branches")
+            //  .HasKey(p => p.Id);
+
+            //builder.Entity<Branch>().Property(p => p.Id)
+            //  .IsRequired()
+            //  .ValueGeneratedOnAdd();
+
+            //builder.Entity<Branch>().Property(p => p.Name).IsRequired();
+
+
+            // Data samples //
 
             builder.Entity<Branch>().HasData
                 (
                     new Branch { Id = 100,Name="Maadi" , Phone="01111111111" },
-                    new Branch { Id = 101,Name="October", Phone="02222222222" }
+                    new Branch { Id = 101,Name="October", Phone="02222222222"}
                 );
 
             builder.Entity<Volunteer>().HasData

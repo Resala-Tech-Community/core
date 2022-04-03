@@ -14,7 +14,7 @@ namespace resala.core.Domain.Models
         public string Phone { get; set; }
         public Gender Gender { get; set; }
         public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string NationalIdNumber { get; set; }
         public string ResidenceArea { get; set; }
 
@@ -41,29 +41,29 @@ namespace resala.core.Domain.Models
 
         public bool ResalaGraduated { get; set; }
         public ushort GraduationGroupNumber { get; set; }
-        public DateTime GraduationDate { get; set; }
+        public DateTime? GraduationDate { get; set; }
 
         public bool IsOmraWinner { get; set; }
-        public DateTime WonDate { get; set; }
-        public DateTime TravelDate { get; set; }
+        public DateTime? WonDate { get; set; }
+        public DateTime? TravelDate { get; set; }
 
         public bool IsMiniCampQualifed { get; set; }
-        public DateTime MiniCampQualificationDate { get; set; }
+        public DateTime? MiniCampQualificationDate { get; set; }
 
         public bool IsLeadersCampQualifed { get; set; }
-        public DateTime LeadersCampQualificationDate { get; set; }
+        public DateTime? LeadersCampQualificationDate { get; set; }
 
         public bool IsDrMeetingQualifed { get; set; }
-        public DateTime DrMeetingQualificationDate { get; set; }
+        public DateTime? DrMeetingQualificationDate { get; set; }
 
         public bool IsInterviewQualifed { get; set; }
-        public DateTime InterviewQualificationDate { get; set; }
+        public DateTime? InterviewQualificationDate { get; set; }
 
 
 
         // Activity Infromation
 
-        public DateTime ActivityJoinDate { get; set; }
+        public DateTime? ActivityJoinDate { get; set; }
         public string JoiningObjectives { get; set; }
 
         // Previous Experince
@@ -74,7 +74,7 @@ namespace resala.core.Domain.Models
 
         public string ProfileImagePath { get; set; }
         public string NationalIdPath { get; set; }
-        public IList<string> Images { get; set; }
+       // public IList<string> Images { get; set; }
 
         // Data Policies Consent
 
@@ -98,7 +98,7 @@ namespace resala.core.Domain.Models
 
         // Exit Information
 
-        public DateTime ExitDate { get; set; }
+        public DateTime? ExitDate { get; set; }
         public string ExitReason { get; set; }
 
         // General 

@@ -10,7 +10,7 @@ namespace resala.core.Domain.Models
         Father = 1,
 
         Brother = 2,
-
+        
         PaternalUncle =3,
 
         MaternalUncle = 4

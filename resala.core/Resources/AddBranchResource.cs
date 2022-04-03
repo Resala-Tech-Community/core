@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using resala.core.Validation.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace resala.core.Resources
 {
