@@ -7,7 +7,6 @@ namespace resala.core.Domain.Models
     [Table("Branches")]
     public class Branch : BaseModel
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -18,6 +17,6 @@ namespace resala.core.Domain.Models
         public string Phone { get; set; }
 
         
-        public IList<Volunteer> Volunteers { get; set; } = new List<Volunteer>();
+        //public IList<ResponsibleVolunteer> Volunteers { get; set; } = new List<ResponsibleVolunteer>();
     }
 }

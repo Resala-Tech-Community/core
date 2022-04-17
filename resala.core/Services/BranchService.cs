@@ -12,11 +12,11 @@ namespace resala.core.Services
 {
     public class BranchService : IBranchService
     {
-        private readonly IBranchRepository _branchRepoitory;
+        private readonly IGenericReposirty<Branch> _branchRepoitory;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public BranchService(IBranchRepository branchRepoitory, IUnitOfWork unitOfWork, IMapper mapper)
+        public BranchService(IGenericReposirty<Branch> branchRepoitory, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _branchRepoitory = branchRepoitory;
             _unitOfWork = unitOfWork;

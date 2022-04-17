@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using resala.core.Domain.Models;
 using resala.core.Domain.Repositories;
 using resala.core.Domain.Services;
 using resala.core.Persistence.Contexts;
@@ -35,15 +36,18 @@ namespace resala.core
             services.AddAutoMapper(typeof(Startup));
 
 
-            services.AddDbContext<AppDbContext>(options => {
-                options.UseInMemoryDatabase("resala-core-in-memory");
-            });
+            services.AddDbContext<AppDbContext>();
 
-            services.AddScoped<IVolunteerRepository, VolunteerRepository>();
+
             services.AddScoped<IVolunteerService, VolunteerService>();
+            services.AddScoped<IGenericReposirty<ResponsibleVolunteer>, GenericRepositry<ResponsibleVolunteer>>();
 
-            services.AddScoped<IBranchRepository, BranchRepository>();
+
+
             services.AddScoped<IBranchService, BranchService>();
+            services.AddScoped<IGenericReposirty<Branch>, GenericRepositry<Branch>>();
+
+            //TODO: Support generic regestrin later
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

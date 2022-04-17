@@ -3,15 +3,8 @@ using System.Collections.Generic;
 
 namespace resala.core.Resources
 {
-    public class VolunteerResource
+    public class ResponsibleVolunteerResource
     {
-        //public int Id { get; set; }
-        //public string Name { get; set; }
-        //public string Phone { get; set; }
-        //public string Gender { get; set; }
-        //public BranchResource Branch { get; set; }
-
-        public int Id { get; set; }
 
         // Personal Information
         public string Name { get; set; }
@@ -91,11 +84,8 @@ namespace resala.core.Resources
         public string VolunteerType { get; set; }
         public string Position { get; set; }
 
-        public int BranchId { get; set; }
-        public BranchResource Branch { get; set; }
-
-        public int CommitteeId { get; set; }
-        public Committee Committee { get; set; }
+        public string BranchName { get; set; }
+        public string CommitteeName { get; set; }
 
         public bool IsSocialMediaGroupsMember { get; set; }
 

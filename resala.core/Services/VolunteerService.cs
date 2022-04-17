@@ -11,11 +11,11 @@ namespace resala.core.Services
 {
     public class VolunteerService : IVolunteerService
     {
-        private readonly IVolunteerRepository _volunteerRepository;
+        private readonly IGenericReposirty<ResponsibleVolunteer> _volunteerRepository;
         private readonly IUnitOfWork _unitOfWork;
 
 
-        public VolunteerService(IVolunteerRepository volunteerRepository, IUnitOfWork unitOfWork)
+        public VolunteerService(IGenericReposirty<ResponsibleVolunteer> volunteerRepository, IUnitOfWork unitOfWork)
         {
             _volunteerRepository = volunteerRepository;
             _unitOfWork = unitOfWork;
@@ -23,7 +23,7 @@ namespace resala.core.Services
 
         public async Task<ModelChangeResponse> DeleteAsync(int id)
         {
-            Volunteer existingVolunteer = await _volunteerRepository.FindByIdAsync(id);
+            ResponsibleVolunteer existingVolunteer = await _volunteerRepository.FindByIdAsync(id);
 
             if (existingVolunteer == null)
                 return new ModelChangeResponse("Volunteer not found.");
@@ -42,12 +42,12 @@ namespace resala.core.Services
             }
         }
 
-        public async Task<IEnumerable<Volunteer>> ListAsync()
+        public async Task<IEnumerable<ResponsibleVolunteer>> ListAsync()
         {
             return await _volunteerRepository.ListAsync();
         }
 
-        public async Task<ModelChangeResponse> SaveAsync(Volunteer volunteer)
+        public async Task<ModelChangeResponse> SaveAsync(ResponsibleVolunteer volunteer)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace resala.core.Services
             }
         }
 
-        public async Task<ModelChangeResponse> UpdateAsync(int id, Volunteer volunteer)
+        public async Task<ModelChangeResponse> UpdateAsync(int id, ResponsibleVolunteer volunteer)
         {
             var existingVolunteer = await _volunteerRepository.FindByIdAsync(id);
 

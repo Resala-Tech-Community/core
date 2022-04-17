@@ -23,43 +23,43 @@ namespace resala.core.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<VolunteerResource>> GetAllAsync()
+        public async Task<IEnumerable<ResponsibleVolunteerResource>> GetAllAsync()
         {
-            IEnumerable<Volunteer> volunteers = await _volunteerService.ListAsync();
-            return _mapper.Map<IEnumerable<Volunteer>, IEnumerable<VolunteerResource>>(volunteers);
+            IEnumerable<ResponsibleVolunteer> volunteers = await _volunteerService.ListAsync();
+            return _mapper.Map<IEnumerable<ResponsibleVolunteer>, IEnumerable<ResponsibleVolunteerResource>>(volunteers);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] AddVolunteerResources resource)
+        public async Task<IActionResult> PostAsync([FromBody] AddResponsibleVolunteerResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            Volunteer volunteer = _mapper.Map<AddVolunteerResources, Volunteer>(resource);
+            ResponsibleVolunteer volunteer = _mapper.Map<AddResponsibleVolunteerResource, ResponsibleVolunteer>(resource);
 
             ModelChangeResponse res = await _volunteerService.SaveAsync(volunteer);
 
             if (!res.Success)
                 return BadRequest(res.Message);
 
-            VolunteerResource volResource = _mapper.Map<Volunteer, VolunteerResource>(res.ChangedModel as Volunteer);
+            ResponsibleVolunteerResource volResource = _mapper.Map<ResponsibleVolunteer, ResponsibleVolunteerResource>(res.ChangedModel as ResponsibleVolunteer);
 
             return Ok(volResource);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] AddVolunteerResources resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] AddResponsibleVolunteerResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            Volunteer vol = _mapper.Map<AddVolunteerResources, Volunteer>(resource);
+            ResponsibleVolunteer vol = _mapper.Map<AddResponsibleVolunteerResource, ResponsibleVolunteer>(resource);
             ModelChangeResponse result = await _volunteerService.UpdateAsync(id, vol);
 
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            VolunteerResource volRes = _mapper.Map<Volunteer, VolunteerResource>(result.ChangedModel as Volunteer);
+            ResponsibleVolunteerResource volRes = _mapper.Map<ResponsibleVolunteer, ResponsibleVolunteerResource>(result.ChangedModel as ResponsibleVolunteer);
 
             return Ok(volRes);
         }
@@ -72,7 +72,7 @@ namespace resala.core.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var volRes = _mapper.Map<Volunteer, VolunteerResource>(result.ChangedModel as Volunteer);
+            var volRes = _mapper.Map<ResponsibleVolunteer, ResponsibleVolunteerResource>(result.ChangedModel as ResponsibleVolunteer);
 
             return Ok(volRes);
         }

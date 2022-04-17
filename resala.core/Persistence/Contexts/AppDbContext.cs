@@ -1,21 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using resala.core.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace resala.core.Persistence.Contexts
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Volunteer> Volunteers { get; set; }
+        public DbSet<ResponsibleVolunteer> ResponsibleVolunteer { get; set; }
         public DbSet<Branch> Branches { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlite("Filename=TestDatabase.db", options =>
+            {
+                options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+            });
+        }
+
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -69,29 +78,77 @@ namespace resala.core.Persistence.Contexts
                     new Branch { Id = 101,Name="October", Phone="02222222222"}
                 );
 
-            builder.Entity<Volunteer>().HasData
+            builder.Entity<ResponsibleVolunteer>().HasData
                 (
-                    new Volunteer
+                    new ResponsibleVolunteer
                     {
                         Id = 100,
                         Name = "TestUser0",
                         Gender = Gender.Male,
                         Phone = "00000000000",
-                        BranchId = 100
-                    },
-                    new Volunteer
-                    {
-                        Id = 101,
-                        Name = "TestUser1",
-                        Gender = Gender.Female,
-                        Phone = "00000000000",
-                        BranchId = 101
+                        Email = "test@test.com",
+                        DateOfBirth =  System.DateTime.Now,
+                        NationalIdNumber = "11111111111111",
+                        ResidenceArea = "garden city",
+                        EducationalDegree = EducationalDegree.Bachelor,
+                        University = "cairo",
+                        Faculty = "engineering",
+                        Specialization = "comm",
+                        AcademicYear = 5,
+                        Graduated = true,
+
+                        MaleRelativeRelation = MaleRelativeRelation.Father,
+                        MaleRelativeName = "father",
+                        MaleRelativePhoneNumber = "00000000000",
+
+                        FemaleRelativeRelation = FemaleRelativeRelation.Mother,
+                        FemaleRelativeName = "mother",
+                        FemalteRelativePhoneNumber = "00000000000",
+
+                        ResalaGraduated = true,
+                        GraduationDate = System.DateTime.Now,
+                        GraduationGroupNumber = "39",
+
+                        IsOmraWinner = true,
+                        OmraWinDate = System.DateTime.Now,
+                        OmraTravelDate = System.DateTime.Now,
+
+                        IsMiniCampQualifed = true,
+                        MiniCampQualificationDate = System.DateTime.Now,
+
+                        IsLeadersCampQualifed = true,
+                        LeadersCampQualificationDate = System.DateTime.Now,
+
+                        IsGraduationInterviewQualifed = true,
+                        GraduationInterviewQualificationDate = System.DateTime.Now,
+
+                        IsDrMeetingQualifed = true,
+                        DrMeetingQualificationDate = System.DateTime.Now,
+
+                        ActivityJoinDate = System.DateTime.Now,
+                        JoiningObjectives = "blabla",
+
+                        PreviousExperince = "blabla",
+
+                        ProfileImage = "/dd/dd/d.png",
+                        NationalIdCopy = "ss/ss/ss.png",
+
+                        IsActivityPolicyAgreed = true,
+                        IsDataPrivacyPolicyAgreed = true,
+                        IsSocialMediaGroupsMember = true,
+
+
+                        WorkingStatus = VolunteeringStatus.Active,
+                        Position = Position.DepartementManager,
+
+                        ExitDate = System.DateTime.Now,
+
+
+
+                        Notes= "asdfasdf"
+                                           
                     }
-                );;
-
-
-
-
+                ); ;
         }
     }
 }

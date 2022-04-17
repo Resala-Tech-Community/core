@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using resala.core.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace resala.core
     {
         public static void Main(string[] args)
         {
+
             var host = CreateHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())

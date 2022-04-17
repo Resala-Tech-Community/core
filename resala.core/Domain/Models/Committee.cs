@@ -16,7 +16,7 @@ namespace resala.core.Domain.Models
         public ushort UniSexCapacity { get; set; }
 
 
-        public IList<Volunteer> Volunteers { get; set; }
+        public IList<ResponsibleVolunteer> Volunteers { get; set; }
 
 
 
