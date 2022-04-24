@@ -36,7 +36,15 @@ namespace resala.core.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            Branch branch = _mapper.Map<AddBranchResource,Branch>(resource);
+            Branch branch = null;
+
+            try
+            {
+                branch = _mapper.Map<AddBranchResource, Branch>(resource);
+            }catch(Exception e)
+            {
+                return BadRequest("Error while maping resources");
+            }
 
             ModelChangeResponse res = await _branchService.SaveAsync(branch);
 

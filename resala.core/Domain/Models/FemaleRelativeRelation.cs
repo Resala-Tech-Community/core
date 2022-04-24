@@ -7,6 +7,7 @@ namespace resala.core.Domain.Models
 {
     public enum FemaleRelativeRelation : byte
     {
+
             Mother = 1,
 
             Sister = 2,

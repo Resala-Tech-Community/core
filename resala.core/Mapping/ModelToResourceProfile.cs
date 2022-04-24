@@ -14,19 +14,16 @@ namespace resala.core.Mapping
 
             CreateMap<ResponsibleVolunteer, ResponsibleVolunteerResource>()
               .ForMember(src => src.Gender, opt => opt.MapFrom(src => src.Gender.ToDescriptionString()))
-              .ForMember(src => src.DateOfBirth, opt => opt.MapFrom(src => ((DateTime)src.DateOfBirth).ToShortDateString()))
-              .ForMember(src => src.GraduationDate, opt => opt.MapFrom(src => ((DateTime)src.GraduationDate).ToShortDateString()))
-              .ForMember(src => src.WonDate, opt => opt.MapFrom(src => ((DateTime)src.OmraWinDate).ToShortDateString()))
-              .ForMember(src => src.TravelDate, opt => opt.MapFrom(src => ((DateTime)src.OmraTravelDate).ToShortDateString()))
-              .ForMember(src => src.MiniCampQualificationDate, opt => opt.MapFrom(src => ((DateTime)src.MiniCampQualificationDate).ToShortDateString()))
-              .ForMember(src => src.LeadersCampQualificationDate, opt => opt.MapFrom(src => ((DateTime)src.LeadersCampQualificationDate).ToShortDateString()))
-              .ForMember(src => src.DrMeetingQualificationDate, opt => opt.MapFrom(src => ((DateTime)src.DrMeetingQualificationDate).ToShortDateString()))
-              .ForMember(src => src.InterviewQualificationDate, opt => opt.MapFrom(src => ((DateTime)src.GraduationInterviewQualificationDate).ToShortDateString()))
-              .ForMember(src => src.ActivityJoinDate, opt => opt.MapFrom(src => ((DateTime)src.ActivityJoinDate).ToShortDateString()))
-              .ForMember(src => src.ExitDate, opt => opt.MapFrom(src => ((DateTime)src.ExitDate).ToShortDateString()))
-              .ForMember(src => src.BranchName, opt => opt.MapFrom(src => src.Branch.Name))
-              .ForMember(src => src.CommitteeName, opt => opt.MapFrom(src => src.Committee.Name))
-
+              .ForMember(src => src.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth != null ? ((DateTime)src.DateOfBirth).ToShortDateString() : null))
+              .ForMember(src => src.GraduationDate, opt => opt.MapFrom(src => src.GraduationDate != null ? ((DateTime)src.GraduationDate).ToShortDateString() : null))
+              .ForMember(src => src.OmraWonDate, opt => opt.MapFrom(src => src.OmraWinDate != null ? ((DateTime)src.OmraWinDate).ToShortDateString() : null))
+              .ForMember(src => src.OmraTravelDate, opt => opt.MapFrom(src => src.OmraTravelDate != null ? ((DateTime)src.OmraTravelDate).ToShortDateString() : null))
+              .ForMember(src => src.MiniCampQualificationDate, opt => opt.MapFrom(src => src.MiniCampQualificationDate != null ? ((DateTime)src.MiniCampQualificationDate).ToShortDateString() : null))
+              .ForMember(src => src.LeadersCampQualificationDate, opt => opt.MapFrom(src => src.LeadersCampQualificationDate != null ? ((DateTime)src.LeadersCampQualificationDate).ToShortDateString() : null))
+              .ForMember(src => src.DrMeetingQualificationDate, opt => opt.MapFrom(src => src.DrMeetingQualificationDate != null ? ((DateTime)src.DrMeetingQualificationDate).ToShortDateString() : null))
+              .ForMember(src => src.GraduationInterviewQualificationDate, opt => opt.MapFrom(src => src.GraduationInterviewQualificationDate != null ? ((DateTime)src.GraduationInterviewQualificationDate).ToShortDateString() : null))
+              .ForMember(src => src.ActivityJoinDate, opt => opt.MapFrom(src => src.ActivityJoinDate != null ? ((DateTime)src.ActivityJoinDate).ToShortDateString() : null))
+              .ForMember(src => src.ExitDate, opt => opt.MapFrom(src => src.ExitDate != null ? ((DateTime)src.ExitDate).ToShortDateString() : null))
               ;
         }
     }

@@ -16,7 +16,5 @@ namespace resala.core.Domain.Models
         [MaxLength(11)]
         public string Phone { get; set; }
 
-        
-        //public IList<ResponsibleVolunteer> Volunteers { get; set; } = new List<ResponsibleVolunteer>();
     }
 }

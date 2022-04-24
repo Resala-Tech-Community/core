@@ -30,53 +30,26 @@ namespace resala.core.Persistence.Contexts
         {
             base.OnModelCreating(builder);
 
-            // Volunteers //
-
-            //builder.Entity<Volunteer>()
-            //    .ToTable("Volunteers")
-            //    .HasKey(p => p.Id);
-
-            //builder.Entity<Volunteer>().Property(p => p.Id)
-            //    .IsRequired()
-            //    .ValueGeneratedOnAdd();
-
-            //builder.Entity<Volunteer>().Property(p => p.Name)
-            //   .IsRequired()
-            //   .HasMaxLength(30);
-
-            //builder.Entity<Volunteer>().Property(p => p.Phone)
-            //    .IsRequired()
-            //    .HasMaxLength(11);
-
-            //builder.Entity<Volunteer>().Property(p => p.Gender).IsRequired();
-
-
-            //builder.Entity<Volunteer>().HasOne(p => p.Branch).WithMany(b => b.Volunteers).HasForeignKey(v => v.BranchId);
-
-            //builder.Entity<Volunteer>().HasOne(p => p.Committee).WithMany(b => b.Volunteers).HasForeignKey(v => v.CommitteeId);
-
-
-
-            //// Branch //
-
-            //builder.Entity<Branch>()
-            //  .ToTable("Branches")
-            //  .HasKey(p => p.Id);
-
-            //builder.Entity<Branch>().Property(p => p.Id)
-            //  .IsRequired()
-            //  .ValueGeneratedOnAdd();
-
-            //builder.Entity<Branch>().Property(p => p.Name).IsRequired();
-
-
             // Data samples //
 
             builder.Entity<Branch>().HasData
                 (
-                    new Branch { Id = 100,Name="Maadi" , Phone="01111111111" },
-                    new Branch { Id = 101,Name="October", Phone="02222222222"}
+                    new Branch { Id = 100,Name="Maadi" , Phone="01111111111"  },
+                    new Branch { Id = 101,Name="October", Phone="02222222222" }
                 );
+
+            builder.Entity<Committee>().HasData
+               (
+                   new Committee { Id = 100, Name = "HR" },
+                   new Committee { Id = 101, Name = "HR VOL" }
+               );
+
+            builder.Entity<Activity>().HasData
+             (
+                 new Activity { Id = 100, Name = "Qwafel" }
+             );
+
+
 
             builder.Entity<ResponsibleVolunteer>().HasData
                 (
@@ -105,25 +78,17 @@ namespace resala.core.Persistence.Contexts
                         FemaleRelativeName = "mother",
                         FemalteRelativePhoneNumber = "00000000000",
 
-                        ResalaGraduated = true,
-                        GraduationDate = System.DateTime.Now,
-                        GraduationGroupNumber = "39",
+                        ResalaGraduated = false,
 
-                        IsOmraWinner = true,
-                        OmraWinDate = System.DateTime.Now,
-                        OmraTravelDate = System.DateTime.Now,
+                        IsOmraWinner = false,
 
-                        IsMiniCampQualifed = true,
-                        MiniCampQualificationDate = System.DateTime.Now,
+                        IsMiniCampQualifed = false,
 
-                        IsLeadersCampQualifed = true,
-                        LeadersCampQualificationDate = System.DateTime.Now,
+                        IsLeadersCampQualifed = false,
 
-                        IsGraduationInterviewQualifed = true,
-                        GraduationInterviewQualificationDate = System.DateTime.Now,
+                        IsGraduationInterviewQualifed = false,
 
-                        IsDrMeetingQualifed = true,
-                        DrMeetingQualificationDate = System.DateTime.Now,
+                        IsDrMeetingQualifed = false,
 
                         ActivityJoinDate = System.DateTime.Now,
                         JoiningObjectives = "blabla",
@@ -141,7 +106,10 @@ namespace resala.core.Persistence.Contexts
                         WorkingStatus = VolunteeringStatus.Active,
                         Position = Position.DepartementManager,
 
-                        ExitDate = System.DateTime.Now,
+
+                        BranchId = 100,
+                        CommitteeId = 100,
+                        ActivityId = 100,
 
 
 

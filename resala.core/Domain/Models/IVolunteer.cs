@@ -1,14 +1,13 @@
 ﻿using resala.core.Validation.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Mail;
 
 namespace resala.core.Domain.Models
 {
     public abstract class IVolunteer : BaseModel
     {
-        public int Id { get; set; }
-
         // Personal Information
         [Required(ErrorMessage ="Required")]
         public string Name { get; set; }
@@ -57,6 +56,10 @@ namespace resala.core.Domain.Models
 
 
         public virtual VolunteerType VolunteerType { get; set; } = VolunteerType.Visitor;
+
+
+        public int BranchId { get; set; }
+        public virtual Branch Branch { get; set; }
 
 
 

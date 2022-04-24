@@ -7,6 +7,9 @@ namespace resala.core.Validation.Attributes
     {
         public override bool IsValid(object value)
         {
+            if (value == null)
+                return true;
+
             DateTime dt;
             bool IsValidDate = DateTime.TryParse(value.ToString(), out dt);
 

@@ -14,20 +14,22 @@ namespace resala.core.Mapping
         {
             CreateMap<AddBranchResource, Branch>();
 
-            CreateMap<ResponsibleVolunteerResource, ResponsibleVolunteer>();
-              //.ForMember(src => src.Gender, opt => opt.MapFrom(src => src.Gender.ToDescriptionString()))
-              //.ForMember(src => src.DateOfBirth, opt => opt.MapFrom(src => ((DateTime)src.DateOfBirth).ToShortDateString()))
-              //.ForMember(src => src.GraduationDate, opt => opt.MapFrom(src => ((DateTime)src.GraduationDate).ToShortDateString()))
-              //.ForMember(src => src.WonDate, opt => opt.MapFrom(src => ((DateTime)src.OmraWinDate).ToShortDateString()))
-              //.ForMember(src => src.TravelDate, opt = > opt.MapFrom(src => ((DateTime)src.OmraTravelDate).ToShortDateString()))
-              //.ForMember(src => src.MiniCampQualificationDate, opt => opt.MapFrom(src => ((DateTime)src.MiniCampQualificationDate).ToShortDateString()))
-              //.ForMember(src => src.LeadersCampQualificationDate, opt => opt.MapFrom(src => ((DateTime)src.LeadersCampQualificationDate).ToShortDateString()))
-              //.ForMember(src => src.DrMeetingQualificationDate, opt => opt.MapFrom(src => ((DateTime)src.DrMeetingQualificationDate).ToShortDateString()))
-              //.ForMember(src => src.InterviewQualificationDate, opt => opt.MapFrom(src => ((DateTime)src.GraduationInterviewQualificationDate).ToShortDateString()))
-              //.ForMember(src => src.ActivityJoinDate, opt => opt.MapFrom(src => ((DateTime)src.ActivityJoinDate).ToShortDateString()))
-              //.ForMember(src => src.ExitDate, opt => opt.MapFrom(src => ((DateTime)src.ExitDate).ToShortDateString()))
-              //.ForMember(src => src.BranchName, opt => opt.MapFrom(src => src.Branch.Name))
-              //.ForMember(src => src.CommitteeName, opt => opt.MapFrom(src => src.Committee.Name));
+            CreateMap<AddResponsibleVolunteerResource, ResponsibleVolunteer>()
+              .ForMember(src => src.Gender, opt => opt.MapFrom(src => Enum.Parse(typeof(Gender),src.Gender)))
+              .ForMember(src => src.DateOfBirth, opt => opt.MapFrom(src => DateTime.Parse(src.DateOfBirth)))
+              .ForMember(src => src.GraduationDate, opt => { opt.Condition(src => !string.IsNullOrEmpty(src.GraduationDate)); opt.MapFrom(src => DateTime.Parse(src.GraduationDate)); })
+              .ForMember(src => src.MaleRelativeRelation, opt => opt.MapFrom(src => Enum.Parse(typeof(MaleRelativeRelation), src.MaleRelativeRelation)))
+              .ForMember(src => src.FemaleRelativeRelation, opt => opt.MapFrom(src => Enum.Parse(typeof(FemaleRelativeRelation), src.FemaleRelativeRelation)))
+              .ForMember(src => src.EducationalDegree, opt => opt.MapFrom(src => Enum.Parse(typeof(EducationalDegree), src.EducationalDegree)))
+              .ForMember(src => src.OmraWinDate, opt => { opt.Condition(src => !string.IsNullOrEmpty(src.OmraWinDate)); opt.MapFrom(src => DateTime.Parse(src.OmraWinDate)); })
+              .ForMember(src => src.OmraTravelDate, opt => { opt.Condition(src => !string.IsNullOrEmpty(src.OmraTravelDate)); opt.MapFrom(src => DateTime.Parse(src.OmraTravelDate)); })
+              .ForMember(src => src.MiniCampQualificationDate, opt => { opt.Condition(src => !string.IsNullOrEmpty(src.MiniCampQualificationDate)); opt.MapFrom(src => DateTime.Parse(src.MiniCampQualificationDate)); })
+              .ForMember(src => src.LeadersCampQualificationDate, opt => { opt.Condition(src => !string.IsNullOrEmpty(src.LeadersCampQualificationDate)); opt.MapFrom(src => DateTime.Parse(src.LeadersCampQualificationDate)); })
+              .ForMember(src => src.DrMeetingQualificationDate, opt => { opt.Condition(src => !string.IsNullOrEmpty(src.DrMeetingQualificationDate)); opt.MapFrom(src => DateTime.Parse(src.DrMeetingQualificationDate)); })
+              .ForMember(src => src.GraduationInterviewQualificationDate, opt => { opt.Condition(src => !string.IsNullOrEmpty(src.GraduationInterviewQualificationDate)); opt.MapFrom(src => DateTime.Parse(src.GraduationInterviewQualificationDate)); })
+              .ForMember(src => src.ActivityJoinDate, opt => opt.MapFrom(src => DateTime.Parse(src.ActivityJoinDate)))
+
+              ;
         }
     }
 }

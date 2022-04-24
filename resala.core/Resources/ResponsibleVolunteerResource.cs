@@ -6,6 +6,8 @@ namespace resala.core.Resources
     public class ResponsibleVolunteerResource
     {
 
+        public int Id { get; set; }
+
         // Personal Information
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -37,12 +39,12 @@ namespace resala.core.Resources
         // Resala Graduation Information
 
         public bool ResalaGraduated { get; set; }
-        public ushort GraduationGroupNumber { get; set; }
+        public string GraduationGroupNumber { get; set; }
         public string GraduationDate { get; set; }
 
         public bool IsOmraWinner { get; set; }
-        public string WonDate { get; set; }
-        public string TravelDate { get; set; }
+        public string OmraWonDate { get; set; }
+        public string OmraTravelDate { get; set; }
 
         public bool IsMiniCampQualifed { get; set; }
         public string MiniCampQualificationDate { get; set; }
@@ -53,8 +55,8 @@ namespace resala.core.Resources
         public bool IsDrMeetingQualifed { get; set; }
         public string DrMeetingQualificationDate { get; set; }
 
-        public bool IsInterviewQualifed { get; set; }
-        public string InterviewQualificationDate { get; set; }
+        public bool IsGraduatoinInterviewQualifed { get; set; }
+        public string GraduationInterviewQualificationDate { get; set; }
 
 
 
@@ -84,9 +86,9 @@ namespace resala.core.Resources
         public string VolunteerType { get; set; }
         public string Position { get; set; }
 
-        public string BranchName { get; set; }
-        public string CommitteeName { get; set; }
-
+        public int BranchId { get; set; }
+        public int ActivityId { get; set; }
+        public int? CommitteeId { get; set; }
         public bool IsSocialMediaGroupsMember { get; set; }
 
 

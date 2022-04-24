@@ -1,8 +1,5 @@
-﻿using resala.core.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using resala.core.Validation.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace resala.core.Resources
 {
@@ -10,60 +7,119 @@ namespace resala.core.Resources
     {
 
         // Personal Information
+        [Required(ErrorMessage = "Required")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Required")]
+        [RegularExpression("0\\d{10}", ErrorMessage = "Invalid phone number")]
         public string Phone { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public string Gender { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Required")]
+        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
         public string DateOfBirth { get; set; }
+
+        [Required(ErrorMessage = "Required")]
+        [RegularExpression("\\d{14}", ErrorMessage = "Invalid national ID")]
         public string NationalIdNumber { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public string ResidenceArea { get; set; }
 
-        // Emergency Contacts
-
-        public string MaleRelativeRelation { get; set; }
-        public string MaleRelativeName { get; set; }
-        public string MaleRelativeNumber { get; set; }
-
-        public string FemaleRelativeRelation { get; set; }
-        public string FemaleRelativeName { get; set; }
-        public string FemalteRelativeNumber { get; set; }
 
         // Educational Information
 
+        [Required(ErrorMessage = "Required")]
         public string EducationalDegree { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public string University { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public string Faculty { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public string Specialization { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public ushort AcademicYear { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public bool Graduated { get; set; }
+
+        // Emergency Contacts
+        [Required(ErrorMessage = "Required")]
+        public string MaleRelativeRelation { get; set; }
+
+        [Required(ErrorMessage = "Required")]
+        public string MaleRelativeName { get; set; }
+
+        [RegularExpression("0\\d{10}", ErrorMessage = "Invalid phone number")]
+        public string MaleRelativePhoneNumber { get; set; }
+
+        [Required(ErrorMessage = "Required")]
+        public string FemaleRelativeRelation { get; set; }
+
+        [Required(ErrorMessage = "Required")]
+        public string FemaleRelativeName { get; set; }
+
+        [RegularExpression("0\\d{10}", ErrorMessage = "Invalid phone number")]
+        public string FemalteRelativePhoneNumber { get; set; }
+
 
         // Resala Graduation Information
 
+        [Required(ErrorMessage = "Required")]
         public bool ResalaGraduated { get; set; }
-        public ushort GraduationGroupNumber { get; set; }
+
+        public string GraduationGroupNumber { get; set; }
+
+        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
         public string GraduationDate { get; set; }
 
+        [Required(ErrorMessage = "Required")]
         public bool IsOmraWinner { get; set; }
-        public string WonDate { get; set; }
-        public string TravelDate { get; set; }
 
+        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        public string OmraWinDate { get; set; }
+
+        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        public string OmraTravelDate { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public bool IsMiniCampQualifed { get; set; }
+
+        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
         public string MiniCampQualificationDate { get; set; }
 
+        [Required(ErrorMessage = "Required")]
         public bool IsLeadersCampQualifed { get; set; }
+
+        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
         public string LeadersCampQualificationDate { get; set; }
 
+        [Required(ErrorMessage = "Required")]
         public bool IsDrMeetingQualifed { get; set; }
+
+        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
         public string DrMeetingQualificationDate { get; set; }
 
-        public bool IsInterviewQualifed { get; set; }
-        public string InterviewQualificationDate { get; set; }
+        [Required(ErrorMessage = "Required")]
+        public bool IsGraduationInterviewQualifed { get; set; }
+
+        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        public string GraduationInterviewQualificationDate { get; set; }
 
 
-
-        // Activity Infromation
-
+        [Required(ErrorMessage = "Required")]
+        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
         public string ActivityJoinDate { get; set; }
+
         public string JoiningObjectives { get; set; }
 
         // Previous Experince
@@ -72,35 +128,26 @@ namespace resala.core.Resources
 
         // Documents
 
-        public string ProfileImagePath { get; set; }
-        public string NationalIdPath { get; set; }
-        //public IList<string> Images { get; set; }
+        public string ProfileImage { get; set; }
+        public string NationalIdCopy { get; set; }
+        // public IList<string> Images { get; set; }
 
         // Data Policies Consent
 
+        [Required(ErrorMessage = "Required")]
         public bool IsActivityPolicyAgreed { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public bool IsDataPrivacyPolicyAgreed { get; set; }
 
         // Hierarchical Information 
+        [Required(ErrorMessage = "Required")]
+        public int BranchId { get; set; }
 
-        public string WorkingStatus { get; set; }
-        public string VolunteerType { get; set; }
-        public string Position { get; set; }
+        [Required(ErrorMessage = "Required")]
+        public int ActivityId { get; set; }
 
-        public string BranchName { get; set; }
-        public string CommitteeName { get; set; }
-
-        public bool IsSocialMediaGroupsMember { get; set; }
-
-
-        // Exit Information
-
-        public string ExitDate { get; set; }
-        public string ExitReason { get; set; }
-
-        // General 
-
-        public string Notes { get; set; }
+        public int? CommitteeId { get; set; }
 
     }
 }

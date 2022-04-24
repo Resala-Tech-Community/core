@@ -15,6 +15,9 @@ namespace resala.core.Domain.Models
             VolunteerType = VolunteerType.Member;
         }
 
+        public int Id { get; set; }
+
+
         // Emergency Contacts
         [Required(ErrorMessage = "Required")]
         public MaleRelativeRelation MaleRelativeRelation { get; set; }
@@ -25,10 +28,10 @@ namespace resala.core.Domain.Models
         [RegularExpression("0\\d{10}", ErrorMessage = "Invalid phone number")]
         public string MaleRelativePhoneNumber { get; set; }
 
-        [RegularExpression("0\\d{10}", ErrorMessage = "Invalid phone number")]
+        [Required(ErrorMessage = "Required")]
         public FemaleRelativeRelation FemaleRelativeRelation { get; set; }
 
-        [RegularExpression("0\\d{10}", ErrorMessage = "Invalid phone number")]
+        [Required(ErrorMessage = "Required")]
         public string FemaleRelativeName { get; set; }
 
         [RegularExpression("0\\d{10}", ErrorMessage = "Invalid phone number")]
@@ -40,48 +43,40 @@ namespace resala.core.Domain.Models
         [Required(ErrorMessage = "Required")]
         public bool ResalaGraduated { get; set; }
 
-        [Required(ErrorMessage = "Required")]
         public string GraduationGroupNumber { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid graduation date")]
         public DateTime? GraduationDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public bool IsOmraWinner { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid winning omra date")]
         public DateTime? OmraWinDate { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid omra travel date")]
         public DateTime? OmraTravelDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public bool IsMiniCampQualifed { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid mini camp attendance date")]
         public DateTime? MiniCampQualificationDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public bool IsLeadersCampQualifed { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid leader camp attendence date")]
         public DateTime? LeadersCampQualificationDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public bool IsDrMeetingQualifed { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid Dr meeting attendence date")]
         public DateTime? DrMeetingQualificationDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public bool IsGraduationInterviewQualifed { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid interview attendence date")]
         public DateTime? GraduationInterviewQualificationDate { get; set; }
 
         // Activity Infromation
 
-
+        public int ActivityId { get; set; }
         public Activity Activity { get; set; }
         public DateTime? ActivityJoinDate { get; set; }
         public string JoiningObjectives { get; set; }
@@ -106,11 +101,9 @@ namespace resala.core.Domain.Models
         public VolunteeringStatus WorkingStatus { get; set; }
         public Position Position { get; set; }
 
-        //public int BranchId { get; set; }
-        public Branch Branch { get; set; }
 
-        //public int CommitteeId { get; set; }
-        public Committee Committee { get; set; }
+        public int? CommitteeId { get; set; }
+        public virtual Committee Committee { get; set; }
 
         public bool IsSocialMediaGroupsMember { get; set; }
 
