@@ -86,7 +86,8 @@ namespace resala.core.Resources
         public string VolunteerType { get; set; }
         public string Position { get; set; }
 
-        public int BranchId { get; set; }
+        //public int BranchId { get; set; }
+        public BranchResource Branch { get; set; }
         public int ActivityId { get; set; }
         public int? CommitteeId { get; set; }
         public bool IsSocialMediaGroupsMember { get; set; }

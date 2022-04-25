@@ -12,7 +12,7 @@ namespace resala.core.Domain.Services
     {
         Task<IEnumerable<Branch>> ListAsync();
         Task<ModelChangeResponse> SaveAsync(Branch branch);
-        Task<ModelChangeResponse> UpdateAsync(int id, AddBranchResource branch);
+        Task<ModelChangeResponse> UpdateAsync(int id, Branch branch);
         Task<ModelChangeResponse> DeleteAsync(int id);
 
     }

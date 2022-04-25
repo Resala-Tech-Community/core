@@ -65,15 +65,14 @@ namespace resala.core.Services
             }
         }
 
-        public async Task<ModelChangeResponse> UpdateAsync(int id, AddBranchResource branchReource)
+        public async Task<ModelChangeResponse> UpdateAsync(int id, Branch branch)
         {
             var existingBranch = await _branchRepoitory.FindByIdAsync(id);
 
             if (existingBranch == null)
                 return new ModelChangeResponse("Branch not found.");
 
-            //TODO: Needs checking if this update the whole model even non-dirty fields or not
-            _mapper.Map(branchReource, existingBranch);
+            _mapper.Map(branch, existingBranch);
 
             try
             {

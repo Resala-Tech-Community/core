@@ -22,6 +22,8 @@ namespace resala.core.Persistence.Contexts
             {
                 options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
             });
+
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
 

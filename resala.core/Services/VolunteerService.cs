@@ -1,7 +1,9 @@
-﻿using resala.core.Domain.Models;
+﻿using AutoMapper;
+using resala.core.Domain.Models;
 using resala.core.Domain.Repositories;
 using resala.core.Domain.Services;
 using resala.core.Domain.Services.Communication;
+using resala.core.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +15,15 @@ namespace resala.core.Services
     {
         private readonly IGenericReposirty<ResponsibleVolunteer> _volunteerRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
 
-        public VolunteerService(IGenericReposirty<ResponsibleVolunteer> volunteerRepository, IUnitOfWork unitOfWork)
+
+        public VolunteerService(IGenericReposirty<ResponsibleVolunteer> volunteerRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _volunteerRepository = volunteerRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<ModelChangeResponse> DeleteAsync(int id)
@@ -70,11 +75,11 @@ namespace resala.core.Services
             if (existingVolunteer == null)
                 return new ModelChangeResponse("Volunteer not found.");
 
-            existingVolunteer.Name = volunteer.Name;
+            _mapper.Map(volunteer, existingVolunteer);
 
             try
             {
-                _volunteerRepository.Update(existingVolunteer);
+               // _volunteerRepository.Update(existingVolunteer);
                 await _unitOfWork.CompleteAsync();
 
                 return new ModelChangeResponse(existingVolunteer);

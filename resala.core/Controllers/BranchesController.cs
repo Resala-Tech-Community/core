@@ -62,8 +62,8 @@ namespace resala.core.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            //Branch branch = _mapper.Map<AddBranchResource, Branch>(resource);
-            ModelChangeResponse result = await _branchService.UpdateAsync(id, resource);
+            Branch branch = _mapper.Map<AddBranchResource, Branch>(resource);
+            ModelChangeResponse result = await _branchService.UpdateAsync(id, branch);
 
             if (!result.Success)
                 return BadRequest(result.Message);

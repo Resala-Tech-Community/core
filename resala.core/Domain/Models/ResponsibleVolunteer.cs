@@ -77,7 +77,7 @@ namespace resala.core.Domain.Models
         // Activity Infromation
 
         public int ActivityId { get; set; }
-        public Activity Activity { get; set; }
+        public virtual Activity Activity { get; set; }
         public DateTime? ActivityJoinDate { get; set; }
         public string JoiningObjectives { get; set; }
 
