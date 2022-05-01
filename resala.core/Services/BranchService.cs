@@ -23,7 +23,7 @@ namespace resala.core.Services
             _mapper = mapper;
         }
 
-        public async Task<ModelChangeResponse> DeleteAsync(int id)
+        public virtual async Task<ModelChangeResponse> DeleteAsync(int id)
         {
             Branch existingBranch = await _branchRepoitory.FindByIdAsync(id);
 
@@ -44,12 +44,12 @@ namespace resala.core.Services
             }
         }
 
-        public async Task<IEnumerable<Branch>> ListAsync()
+        public virtual async Task<IEnumerable<Branch>> ListAsync()
         {
             return await _branchRepoitory.ListAsync();
         }
 
-        public async Task<ModelChangeResponse> SaveAsync(Branch branch)
+        public virtual async Task<ModelChangeResponse> SaveAsync(Branch branch)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace resala.core.Services
             }
         }
 
-        public async Task<ModelChangeResponse> UpdateAsync(int id, Branch branch)
+        public virtual async Task<ModelChangeResponse> UpdateAsync(int id, Branch branch)
         {
             var existingBranch = await _branchRepoitory.FindByIdAsync(id);
 

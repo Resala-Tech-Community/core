@@ -2,9 +2,6 @@
 using resala.core.Domain.Models;
 using resala.core.Resources;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace resala.core.Mapping
 {
@@ -13,6 +10,9 @@ namespace resala.core.Mapping
         public ResourceToModelProfile()
         {
             CreateMap<AddBranchResource, Branch>();
+            CreateMap<AddActivityResource, Activity>();
+            CreateMap<AddCommitteeResource, Committee>();
+
 
             CreateMap<AddResponsibleVolunteerResource, ResponsibleVolunteer>()
               .ForMember(src => src.Gender, opt => opt.MapFrom(src => Enum.Parse(typeof(Gender),src.Gender)))

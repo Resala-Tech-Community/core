@@ -11,6 +11,10 @@ namespace resala.core.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<Branch, BranchResource>();
+            CreateMap<Activity, ActivityResource>();
+            CreateMap<Committee, CommitteeResource>();
+
+
        
             CreateMap<ResponsibleVolunteer, ResponsibleVolunteerResource>()
               .ForMember(src => src.Gender, opt => opt.MapFrom(src => src.Gender.ToDescriptionString()))

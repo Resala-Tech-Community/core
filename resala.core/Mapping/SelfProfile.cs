@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
 using resala.core.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace resala.core.Mapping
 {
@@ -14,7 +10,13 @@ namespace resala.core.Mapping
             CreateMap<ResponsibleVolunteer, ResponsibleVolunteer>()
                .ForMember(src => src.Id, opt => opt.Ignore());
 
+            CreateMap<Activity, Activity>()
+              .ForMember(src => src.Id, opt => opt.Ignore());
+
             CreateMap<Branch, Branch>()
+              .ForMember(src => src.Id, opt => opt.Ignore());
+
+            CreateMap<Committee, Committee>()
               .ForMember(src => src.Id, opt => opt.Ignore());
         }
     }

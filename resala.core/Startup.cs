@@ -44,10 +44,20 @@ namespace resala.core
 
 
 
+
             services.AddScoped<IBranchService, BranchService>();
             services.AddScoped<IGenericReposirty<Branch>, GenericRepositry<Branch>>();
 
-            //TODO: Support generic regestrin later
+            services.AddScoped<IActivityServices, ActivityService>();
+            services.AddScoped<IBasicService<Activity>, BasicService<Activity>>();
+            services.AddScoped<IGenericReposirty<Activity>, GenericRepositry<Activity>>();
+
+
+            services.AddScoped<ICommitteeService, CommitteeService>();
+            services.AddScoped<IBasicService<Committee>, BasicService<Committee>>();
+            services.AddScoped<IGenericReposirty<Committee>, GenericRepositry<Committee>>();
+
+            //TODO: Support generic regestration later
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

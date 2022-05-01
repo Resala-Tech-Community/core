@@ -2,14 +2,10 @@
 
 namespace resala.core.Resources
 {
-    public class AddBranchResource
+    public class AddActivityResource
     {
         [Required]
-        [MaxLength(30)]
+        [MaxLength(20)]
         public string Name { get; set; }
-
-        [Required]
-        [MaxLength(11)]
-        public string Phone { get; set; }
     }
 }
