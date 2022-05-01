@@ -15,6 +15,7 @@ namespace resala.core.Controllers
     {
         protected readonly IMapper _mapper;
         protected readonly IBasicService<TEntity> _basicService;
+        private IMapper mapper;
 
         public IBasicController(IMapper mapper , IBasicService<TEntity> basicService)
         {

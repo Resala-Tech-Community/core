@@ -40,12 +40,14 @@ namespace resala.core
 
 
             services.AddScoped<IVolunteerService, VolunteerService>();
+            services.AddScoped<IBasicService<ResponsibleVolunteer>, BasicService<ResponsibleVolunteer>>();
             services.AddScoped<IGenericReposirty<ResponsibleVolunteer>, GenericRepositry<ResponsibleVolunteer>>();
 
 
 
 
             services.AddScoped<IBranchService, BranchService>();
+            services.AddScoped<IBasicService<Branch>, BasicService<Branch>>();
             services.AddScoped<IGenericReposirty<Branch>, GenericRepositry<Branch>>();
 
             services.AddScoped<IActivityServices, ActivityService>();

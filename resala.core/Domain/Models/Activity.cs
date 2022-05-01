@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace resala.core.Domain.Models
 {
     [Table("Activities")]
-    public class Activity
+    public class Activity : BaseModel
     {
 
         public int Id { get; set; }
