@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace resala.core.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,7 +35,7 @@ namespace resala.core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Committee",
+                name: "Committees",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -47,11 +47,27 @@ namespace resala.core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Committee", x => x.Id);
+                    table.PrimaryKey("PK_Committees", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ResponsibleVolunteer",
+                name: "Trackers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Location = table.Column<byte>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    RequiredInfo = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trackers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ResponsibleVolunteers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -109,23 +125,23 @@ namespace resala.core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResponsibleVolunteer", x => x.Id);
+                    table.PrimaryKey("PK_ResponsibleVolunteers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ResponsibleVolunteer_Activities_ActivityId",
+                        name: "FK_ResponsibleVolunteers_Activities_ActivityId",
                         column: x => x.ActivityId,
                         principalTable: "Activities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ResponsibleVolunteer_Branches_BranchId",
+                        name: "FK_ResponsibleVolunteers_Branches_BranchId",
                         column: x => x.BranchId,
                         principalTable: "Branches",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ResponsibleVolunteer_Committee_CommitteeId",
+                        name: "FK_ResponsibleVolunteers_Committees_CommitteeId",
                         column: x => x.CommitteeId,
-                        principalTable: "Committee",
+                        principalTable: "Committees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -146,40 +162,43 @@ namespace resala.core.Migrations
                 values: new object[] { 101, "October", "02222222222" });
 
             migrationBuilder.InsertData(
-                table: "Committee",
+                table: "Committees",
                 columns: new[] { "Id", "FemaleCapacity", "MaleCapacity", "Name", "UniSexCapacity" },
                 values: new object[] { 100, (ushort)0, (ushort)0, "HR", (ushort)0 });
 
             migrationBuilder.InsertData(
-                table: "Committee",
+                table: "Committees",
                 columns: new[] { "Id", "FemaleCapacity", "MaleCapacity", "Name", "UniSexCapacity" },
                 values: new object[] { 101, (ushort)0, (ushort)0, "HR VOL", (ushort)0 });
 
             migrationBuilder.InsertData(
-                table: "ResponsibleVolunteer",
+                table: "ResponsibleVolunteers",
                 columns: new[] { "Id", "AcademicYear", "ActivityId", "ActivityJoinDate", "BranchId", "CommitteeId", "DateOfBirth", "DrMeetingQualificationDate", "EducationalDegree", "Email", "ExitDate", "ExitReason", "Faculty", "FemaleRelativeName", "FemaleRelativeRelation", "FemalteRelativePhoneNumber", "Gender", "Graduated", "GraduationDate", "GraduationGroupNumber", "GraduationInterviewQualificationDate", "IsActivityPolicyAgreed", "IsDataPrivacyPolicyAgreed", "IsDrMeetingQualifed", "IsGraduationInterviewQualifed", "IsLeadersCampQualifed", "IsMiniCampQualifed", "IsOmraWinner", "IsSocialMediaGroupsMember", "JoiningObjectives", "LeadersCampQualificationDate", "MaleRelativeName", "MaleRelativePhoneNumber", "MaleRelativeRelation", "MiniCampQualificationDate", "Name", "NationalIdCopy", "NationalIdNumber", "Notes", "OmraTravelDate", "OmraWinDate", "Phone", "Position", "PreviousExperince", "ProfileImage", "ResalaGraduated", "ResidenceArea", "Specialization", "University", "VolunteerType", "WorkingStatus" },
-                values: new object[] { 100, (ushort)5, 100, new DateTime(2022, 5, 5, 18, 38, 31, 8, DateTimeKind.Local).AddTicks(2326), 100, 100, new DateTime(2022, 5, 5, 18, 38, 31, 5, DateTimeKind.Local).AddTicks(2109), null, 4, "test@test.com", null, null, "engineering", "mother", (byte)1, "00000000000", (byte)1, true, null, null, null, true, true, false, false, false, false, false, true, "blabla", null, "father", "00000000000", (byte)1, null, "TestUser0", "ss/ss/ss.png", "11111111111111", "asdfasdf", null, null, "00000000000", (byte)8, "blabla", "/dd/dd/d.png", false, "garden city", "comm", "cairo", (byte)4, (byte)1 });
+                values: new object[] { 100, (ushort)5, 100, new DateTime(2022, 5, 5, 22, 38, 23, 501, DateTimeKind.Local).AddTicks(6815), 100, 100, new DateTime(2022, 5, 5, 22, 38, 23, 498, DateTimeKind.Local).AddTicks(9952), null, 4, "test@test.com", null, null, "engineering", "mother", (byte)1, "00000000000", (byte)1, true, null, null, null, true, true, false, false, false, false, false, true, "blabla", null, "father", "00000000000", (byte)1, null, "TestUser0", "ss/ss/ss.png", "11111111111111", "asdfasdf", null, null, "00000000000", (byte)8, "blabla", "/dd/dd/d.png", false, "garden city", "comm", "cairo", (byte)4, (byte)1 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ResponsibleVolunteer_ActivityId",
-                table: "ResponsibleVolunteer",
+                name: "IX_ResponsibleVolunteers_ActivityId",
+                table: "ResponsibleVolunteers",
                 column: "ActivityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ResponsibleVolunteer_BranchId",
-                table: "ResponsibleVolunteer",
+                name: "IX_ResponsibleVolunteers_BranchId",
+                table: "ResponsibleVolunteers",
                 column: "BranchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ResponsibleVolunteer_CommitteeId",
-                table: "ResponsibleVolunteer",
+                name: "IX_ResponsibleVolunteers_CommitteeId",
+                table: "ResponsibleVolunteers",
                 column: "CommitteeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ResponsibleVolunteer");
+                name: "ResponsibleVolunteers");
+
+            migrationBuilder.DropTable(
+                name: "Trackers");
 
             migrationBuilder.DropTable(
                 name: "Activities");
@@ -188,7 +207,7 @@ namespace resala.core.Migrations
                 name: "Branches");
 
             migrationBuilder.DropTable(
-                name: "Committee");
+                name: "Committees");
         }
     }
 }

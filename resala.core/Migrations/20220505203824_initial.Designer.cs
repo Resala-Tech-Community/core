@@ -9,8 +9,8 @@ using resala.core.Persistence.Contexts;
 namespace resala.core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220505163831_Initial")]
-    partial class Initial
+    [Migration("20220505203824_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,7 +95,7 @@ namespace resala.core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Committee");
+                    b.ToTable("Committees");
 
                     b.HasData(
                         new
@@ -291,7 +291,7 @@ namespace resala.core.Migrations
 
                     b.HasIndex("CommitteeId");
 
-                    b.ToTable("ResponsibleVolunteer");
+                    b.ToTable("ResponsibleVolunteers");
 
                     b.HasData(
                         new
@@ -299,10 +299,10 @@ namespace resala.core.Migrations
                             Id = 100,
                             AcademicYear = (ushort)5,
                             ActivityId = 100,
-                            ActivityJoinDate = new DateTime(2022, 5, 5, 18, 38, 31, 8, DateTimeKind.Local).AddTicks(2326),
+                            ActivityJoinDate = new DateTime(2022, 5, 5, 22, 38, 23, 501, DateTimeKind.Local).AddTicks(6815),
                             BranchId = 100,
                             CommitteeId = 100,
-                            DateOfBirth = new DateTime(2022, 5, 5, 18, 38, 31, 5, DateTimeKind.Local).AddTicks(2109),
+                            DateOfBirth = new DateTime(2022, 5, 5, 22, 38, 23, 498, DateTimeKind.Local).AddTicks(9952),
                             EducationalDegree = 4,
                             Email = "test@test.com",
                             Faculty = "engineering",
@@ -338,6 +338,34 @@ namespace resala.core.Migrations
                             VolunteerType = (byte)4,
                             WorkingStatus = (byte)1
                         });
+                });
+
+            modelBuilder.Entity("resala.core.Domain.Models.Tracker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte>("Location")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RequiredInfo")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Trackers");
                 });
 
             modelBuilder.Entity("resala.core.Domain.Models.ResponsibleVolunteer", b =>
