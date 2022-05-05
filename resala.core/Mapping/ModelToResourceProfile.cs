@@ -14,8 +14,8 @@ namespace resala.core.Mapping
             CreateMap<Activity, ActivityResource>();
             CreateMap<Committee, CommitteeResource>();
 
-
-       
+            CreateMap<Tracker, TrackerResource>();
+            
             CreateMap<ResponsibleVolunteer, ResponsibleVolunteerResource>()
               .ForMember(src => src.Gender, opt => opt.MapFrom(src => src.Gender.ToDescriptionString()))
               .ForMember(src => src.DateOfBirth, opt => opt.MapFrom(src => src.DateOfBirth != null ? ((DateTime)src.DateOfBirth).ToShortDateString() : null))
@@ -29,6 +29,8 @@ namespace resala.core.Mapping
               .ForMember(src => src.ActivityJoinDate, opt => opt.MapFrom(src => src.ActivityJoinDate != null ? ((DateTime)src.ActivityJoinDate).ToShortDateString() : null))
               .ForMember(src => src.ExitDate, opt => opt.MapFrom(src => src.ExitDate != null ? ((DateTime)src.ExitDate).ToShortDateString() : null))
               ;
+
+
         }
     }
 }

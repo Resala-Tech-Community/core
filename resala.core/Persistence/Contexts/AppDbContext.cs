@@ -6,8 +6,7 @@ namespace resala.core.Persistence.Contexts
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<ResponsibleVolunteer> ResponsibleVolunteer { get; set; }
-        public DbSet<Branch> Branches { get; set; }
+        public DbSet<Tracker> Trackers { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {

@@ -13,6 +13,8 @@ namespace resala.core.Mapping
             CreateMap<AddActivityResource, Activity>();
             CreateMap<AddCommitteeResource, Committee>();
 
+            CreateMap<AddTrackerResource, Tracker>()
+                .ForMember(src => src.Location , opt => opt.MapFrom(src => Enum.Parse(typeof(TrackerLocation), src.Location)));
 
             CreateMap<AddResponsibleVolunteerResource, ResponsibleVolunteer>()
               .ForMember(src => src.Gender, opt => opt.MapFrom(src => Enum.Parse(typeof(Gender),src.Gender)))

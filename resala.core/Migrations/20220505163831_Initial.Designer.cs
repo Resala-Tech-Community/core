@@ -9,8 +9,8 @@ using resala.core.Persistence.Contexts;
 namespace resala.core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220416001218_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220505163831_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,13 @@ namespace resala.core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Activities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 100,
+                            Name = "Qwafel"
+                        });
                 });
 
             modelBuilder.Entity("resala.core.Domain.Models.Branch", b =>
@@ -89,6 +96,24 @@ namespace resala.core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Committee");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 100,
+                            FemaleCapacity = (ushort)0,
+                            MaleCapacity = (ushort)0,
+                            Name = "HR",
+                            UniSexCapacity = (ushort)0
+                        },
+                        new
+                        {
+                            Id = 101,
+                            FemaleCapacity = (ushort)0,
+                            MaleCapacity = (ushort)0,
+                            Name = "HR VOL",
+                            UniSexCapacity = (ushort)0
+                        });
                 });
 
             modelBuilder.Entity("resala.core.Domain.Models.ResponsibleVolunteer", b =>
@@ -100,19 +125,20 @@ namespace resala.core.Migrations
                     b.Property<ushort>("AcademicYear")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ActivityId")
+                    b.Property<int>("ActivityId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("ActivityJoinDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("BranchId")
+                    b.Property<int>("BranchId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("CommitteeId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("DateOfBirth")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DrMeetingQualificationDate")
@@ -122,6 +148,7 @@ namespace resala.core.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("ExitDate")
@@ -131,15 +158,17 @@ namespace resala.core.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Faculty")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FemaleRelativeName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<byte>("FemaleRelativeRelation")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("FemalteRelativeNumber")
+                    b.Property<string>("FemalteRelativePhoneNumber")
                         .HasColumnType("TEXT");
 
                     b.Property<byte>("Gender")
@@ -188,9 +217,10 @@ namespace resala.core.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("MaleRelativeName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("MaleRelativeNumber")
+                    b.Property<string>("MaleRelativePhoneNumber")
                         .HasColumnType("TEXT");
 
                     b.Property<byte>("MaleRelativeRelation")
@@ -200,12 +230,14 @@ namespace resala.core.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NationalIdCopy")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NationalIdNumber")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
@@ -218,6 +250,7 @@ namespace resala.core.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<byte>("Position")
@@ -233,12 +266,15 @@ namespace resala.core.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ResidenceArea")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Specialization")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("University")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<byte>("VolunteerType")
@@ -262,45 +298,40 @@ namespace resala.core.Migrations
                         {
                             Id = 100,
                             AcademicYear = (ushort)5,
-                            ActivityJoinDate = new DateTime(2022, 4, 16, 2, 12, 17, 917, DateTimeKind.Local).AddTicks(2053),
-                            DateOfBirth = new DateTime(2022, 4, 16, 2, 12, 17, 914, DateTimeKind.Local).AddTicks(605),
-                            DrMeetingQualificationDate = new DateTime(2022, 4, 16, 2, 12, 17, 917, DateTimeKind.Local).AddTicks(1806),
+                            ActivityId = 100,
+                            ActivityJoinDate = new DateTime(2022, 5, 5, 18, 38, 31, 8, DateTimeKind.Local).AddTicks(2326),
+                            BranchId = 100,
+                            CommitteeId = 100,
+                            DateOfBirth = new DateTime(2022, 5, 5, 18, 38, 31, 5, DateTimeKind.Local).AddTicks(2109),
                             EducationalDegree = 4,
                             Email = "test@test.com",
                             Faculty = "engineering",
                             FemaleRelativeName = "mother",
                             FemaleRelativeRelation = (byte)1,
-                            FemalteRelativeNumber = "00000000000",
+                            FemalteRelativePhoneNumber = "00000000000",
                             Gender = (byte)1,
                             Graduated = true,
-                            GraduationDate = new DateTime(2022, 4, 16, 2, 12, 17, 916, DateTimeKind.Local).AddTicks(8892),
-                            GraduationGroupNumber = "39",
-                            GraduationInterviewQualificationDate = new DateTime(2022, 4, 16, 2, 12, 17, 917, DateTimeKind.Local).AddTicks(1353),
                             IsActivityPolicyAgreed = true,
                             IsDataPrivacyPolicyAgreed = true,
-                            IsDrMeetingQualifed = true,
-                            IsGraduationInterviewQualifed = true,
-                            IsLeadersCampQualifed = true,
-                            IsMiniCampQualifed = true,
-                            IsOmraWinner = true,
+                            IsDrMeetingQualifed = false,
+                            IsGraduationInterviewQualifed = false,
+                            IsLeadersCampQualifed = false,
+                            IsMiniCampQualifed = false,
+                            IsOmraWinner = false,
                             IsSocialMediaGroupsMember = true,
                             JoiningObjectives = "blabla",
-                            LeadersCampQualificationDate = new DateTime(2022, 4, 16, 2, 12, 17, 917, DateTimeKind.Local).AddTicks(902),
                             MaleRelativeName = "father",
-                            MaleRelativeNumber = "00000000000",
+                            MaleRelativePhoneNumber = "00000000000",
                             MaleRelativeRelation = (byte)1,
-                            MiniCampQualificationDate = new DateTime(2022, 4, 16, 2, 12, 17, 917, DateTimeKind.Local).AddTicks(443),
                             Name = "TestUser0",
                             NationalIdCopy = "ss/ss/ss.png",
                             NationalIdNumber = "11111111111111",
                             Notes = "asdfasdf",
-                            OmraTravelDate = new DateTime(2022, 4, 16, 2, 12, 17, 916, DateTimeKind.Local).AddTicks(9964),
-                            OmraWinDate = new DateTime(2022, 4, 16, 2, 12, 17, 916, DateTimeKind.Local).AddTicks(9617),
                             Phone = "00000000000",
                             Position = (byte)8,
                             PreviousExperince = "blabla",
                             ProfileImage = "/dd/dd/d.png",
-                            ResalaGraduated = true,
+                            ResalaGraduated = false,
                             ResidenceArea = "garden city",
                             Specialization = "comm",
                             University = "cairo",
@@ -313,14 +344,18 @@ namespace resala.core.Migrations
                 {
                     b.HasOne("resala.core.Domain.Models.Activity", "Activity")
                         .WithMany()
-                        .HasForeignKey("ActivityId");
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("resala.core.Domain.Models.Branch", "Branch")
                         .WithMany()
-                        .HasForeignKey("BranchId");
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("resala.core.Domain.Models.Committee", "Committee")
-                        .WithMany("Volunteers")
+                        .WithMany()
                         .HasForeignKey("CommitteeId");
 
                     b.Navigation("Activity");
@@ -328,11 +363,6 @@ namespace resala.core.Migrations
                     b.Navigation("Branch");
 
                     b.Navigation("Committee");
-                });
-
-            modelBuilder.Entity("resala.core.Domain.Models.Committee", b =>
-                {
-                    b.Navigation("Volunteers");
                 });
 #pragma warning restore 612, 618
         }

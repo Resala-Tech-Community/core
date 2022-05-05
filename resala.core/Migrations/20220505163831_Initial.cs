@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace resala.core.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,11 +57,11 @@ namespace resala.core.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     MaleRelativeRelation = table.Column<byte>(type: "INTEGER", nullable: false),
-                    MaleRelativeName = table.Column<string>(type: "TEXT", nullable: true),
-                    MaleRelativeNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    MaleRelativeName = table.Column<string>(type: "TEXT", nullable: false),
+                    MaleRelativePhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
                     FemaleRelativeRelation = table.Column<byte>(type: "INTEGER", nullable: false),
-                    FemaleRelativeName = table.Column<string>(type: "TEXT", nullable: true),
-                    FemalteRelativeNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    FemaleRelativeName = table.Column<string>(type: "TEXT", nullable: false),
+                    FemalteRelativePhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
                     ResalaGraduated = table.Column<bool>(type: "INTEGER", nullable: false),
                     GraduationGroupNumber = table.Column<string>(type: "TEXT", nullable: true),
                     GraduationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -76,7 +76,7 @@ namespace resala.core.Migrations
                     DrMeetingQualificationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsGraduationInterviewQualifed = table.Column<bool>(type: "INTEGER", nullable: false),
                     GraduationInterviewQualificationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    ActivityId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ActivityId = table.Column<int>(type: "INTEGER", nullable: false),
                     ActivityJoinDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     JoiningObjectives = table.Column<string>(type: "TEXT", nullable: true),
                     PreviousExperince = table.Column<string>(type: "TEXT", nullable: true),
@@ -86,26 +86,26 @@ namespace resala.core.Migrations
                     IsDataPrivacyPolicyAgreed = table.Column<bool>(type: "INTEGER", nullable: false),
                     WorkingStatus = table.Column<byte>(type: "INTEGER", nullable: false),
                     Position = table.Column<byte>(type: "INTEGER", nullable: false),
-                    BranchId = table.Column<int>(type: "INTEGER", nullable: true),
                     CommitteeId = table.Column<int>(type: "INTEGER", nullable: true),
                     IsSocialMediaGroupsMember = table.Column<bool>(type: "INTEGER", nullable: false),
                     ExitDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     ExitReason = table.Column<string>(type: "TEXT", nullable: true),
                     Notes = table.Column<string>(type: "TEXT", nullable: true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Phone = table.Column<string>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Phone = table.Column<string>(type: "TEXT", nullable: false),
                     Gender = table.Column<byte>(type: "INTEGER", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    NationalIdNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    ResidenceArea = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    NationalIdNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    ResidenceArea = table.Column<string>(type: "TEXT", nullable: false),
                     EducationalDegree = table.Column<int>(type: "INTEGER", nullable: false),
-                    University = table.Column<string>(type: "TEXT", nullable: true),
-                    Faculty = table.Column<string>(type: "TEXT", nullable: true),
-                    Specialization = table.Column<string>(type: "TEXT", nullable: true),
+                    University = table.Column<string>(type: "TEXT", nullable: false),
+                    Faculty = table.Column<string>(type: "TEXT", nullable: false),
+                    Specialization = table.Column<string>(type: "TEXT", nullable: false),
                     AcademicYear = table.Column<ushort>(type: "INTEGER", nullable: false),
                     Graduated = table.Column<bool>(type: "INTEGER", nullable: false),
-                    VolunteerType = table.Column<byte>(type: "INTEGER", nullable: false)
+                    VolunteerType = table.Column<byte>(type: "INTEGER", nullable: false),
+                    BranchId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,13 +115,13 @@ namespace resala.core.Migrations
                         column: x => x.ActivityId,
                         principalTable: "Activities",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ResponsibleVolunteer_Branches_BranchId",
                         column: x => x.BranchId,
                         principalTable: "Branches",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ResponsibleVolunteer_Committee_CommitteeId",
                         column: x => x.CommitteeId,
@@ -129,6 +129,11 @@ namespace resala.core.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Activities",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 100, "Qwafel" });
 
             migrationBuilder.InsertData(
                 table: "Branches",
@@ -141,9 +146,19 @@ namespace resala.core.Migrations
                 values: new object[] { 101, "October", "02222222222" });
 
             migrationBuilder.InsertData(
+                table: "Committee",
+                columns: new[] { "Id", "FemaleCapacity", "MaleCapacity", "Name", "UniSexCapacity" },
+                values: new object[] { 100, (ushort)0, (ushort)0, "HR", (ushort)0 });
+
+            migrationBuilder.InsertData(
+                table: "Committee",
+                columns: new[] { "Id", "FemaleCapacity", "MaleCapacity", "Name", "UniSexCapacity" },
+                values: new object[] { 101, (ushort)0, (ushort)0, "HR VOL", (ushort)0 });
+
+            migrationBuilder.InsertData(
                 table: "ResponsibleVolunteer",
-                columns: new[] { "Id", "AcademicYear", "ActivityId", "ActivityJoinDate", "BranchId", "CommitteeId", "DateOfBirth", "DrMeetingQualificationDate", "EducationalDegree", "Email", "ExitDate", "ExitReason", "Faculty", "FemaleRelativeName", "FemaleRelativeRelation", "FemalteRelativeNumber", "Gender", "Graduated", "GraduationDate", "GraduationGroupNumber", "GraduationInterviewQualificationDate", "IsActivityPolicyAgreed", "IsDataPrivacyPolicyAgreed", "IsDrMeetingQualifed", "IsGraduationInterviewQualifed", "IsLeadersCampQualifed", "IsMiniCampQualifed", "IsOmraWinner", "IsSocialMediaGroupsMember", "JoiningObjectives", "LeadersCampQualificationDate", "MaleRelativeName", "MaleRelativeNumber", "MaleRelativeRelation", "MiniCampQualificationDate", "Name", "NationalIdCopy", "NationalIdNumber", "Notes", "OmraTravelDate", "OmraWinDate", "Phone", "Position", "PreviousExperince", "ProfileImage", "ResalaGraduated", "ResidenceArea", "Specialization", "University", "VolunteerType", "WorkingStatus" },
-                values: new object[] { 100, (ushort)5, null, new DateTime(2022, 4, 16, 2, 12, 17, 917, DateTimeKind.Local).AddTicks(2053), null, null, new DateTime(2022, 4, 16, 2, 12, 17, 914, DateTimeKind.Local).AddTicks(605), new DateTime(2022, 4, 16, 2, 12, 17, 917, DateTimeKind.Local).AddTicks(1806), 4, "test@test.com", null, null, "engineering", "mother", (byte)1, "00000000000", (byte)1, true, new DateTime(2022, 4, 16, 2, 12, 17, 916, DateTimeKind.Local).AddTicks(8892), "39", new DateTime(2022, 4, 16, 2, 12, 17, 917, DateTimeKind.Local).AddTicks(1353), true, true, true, true, true, true, true, true, "blabla", new DateTime(2022, 4, 16, 2, 12, 17, 917, DateTimeKind.Local).AddTicks(902), "father", "00000000000", (byte)1, new DateTime(2022, 4, 16, 2, 12, 17, 917, DateTimeKind.Local).AddTicks(443), "TestUser0", "ss/ss/ss.png", "11111111111111", "asdfasdf", new DateTime(2022, 4, 16, 2, 12, 17, 916, DateTimeKind.Local).AddTicks(9964), new DateTime(2022, 4, 16, 2, 12, 17, 916, DateTimeKind.Local).AddTicks(9617), "00000000000", (byte)8, "blabla", "/dd/dd/d.png", true, "garden city", "comm", "cairo", (byte)4, (byte)1 });
+                columns: new[] { "Id", "AcademicYear", "ActivityId", "ActivityJoinDate", "BranchId", "CommitteeId", "DateOfBirth", "DrMeetingQualificationDate", "EducationalDegree", "Email", "ExitDate", "ExitReason", "Faculty", "FemaleRelativeName", "FemaleRelativeRelation", "FemalteRelativePhoneNumber", "Gender", "Graduated", "GraduationDate", "GraduationGroupNumber", "GraduationInterviewQualificationDate", "IsActivityPolicyAgreed", "IsDataPrivacyPolicyAgreed", "IsDrMeetingQualifed", "IsGraduationInterviewQualifed", "IsLeadersCampQualifed", "IsMiniCampQualifed", "IsOmraWinner", "IsSocialMediaGroupsMember", "JoiningObjectives", "LeadersCampQualificationDate", "MaleRelativeName", "MaleRelativePhoneNumber", "MaleRelativeRelation", "MiniCampQualificationDate", "Name", "NationalIdCopy", "NationalIdNumber", "Notes", "OmraTravelDate", "OmraWinDate", "Phone", "Position", "PreviousExperince", "ProfileImage", "ResalaGraduated", "ResidenceArea", "Specialization", "University", "VolunteerType", "WorkingStatus" },
+                values: new object[] { 100, (ushort)5, 100, new DateTime(2022, 5, 5, 18, 38, 31, 8, DateTimeKind.Local).AddTicks(2326), 100, 100, new DateTime(2022, 5, 5, 18, 38, 31, 5, DateTimeKind.Local).AddTicks(2109), null, 4, "test@test.com", null, null, "engineering", "mother", (byte)1, "00000000000", (byte)1, true, null, null, null, true, true, false, false, false, false, false, true, "blabla", null, "father", "00000000000", (byte)1, null, "TestUser0", "ss/ss/ss.png", "11111111111111", "asdfasdf", null, null, "00000000000", (byte)8, "blabla", "/dd/dd/d.png", false, "garden city", "comm", "cairo", (byte)4, (byte)1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ResponsibleVolunteer_ActivityId",

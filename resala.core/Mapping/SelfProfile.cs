@@ -18,6 +18,9 @@ namespace resala.core.Mapping
 
             CreateMap<Committee, Committee>()
               .ForMember(src => src.Id, opt => opt.Ignore());
+
+            CreateMap<Tracker, Tracker>()
+              .ForMember(src => src.Id, opt => opt.Ignore());
         }
     }
 }

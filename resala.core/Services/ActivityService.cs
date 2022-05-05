@@ -9,8 +9,6 @@ namespace resala.core.Services
     {
         public IBasicService<Activity> BasicService { get; set; }
 
-
-
         public ActivityService(IBasicService<Activity> basicService)
         {
             BasicService = basicService;
