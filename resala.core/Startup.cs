@@ -63,6 +63,10 @@ namespace resala.core
             services.AddScoped<IBasicService<Tracker>, BasicService<Tracker>>();
             services.AddScoped<IGenericReposirty<Tracker>, GenericRepositry<Tracker>>();
 
+            services.AddScoped<ITrackRecordService, TrackRecordService>();
+            services.AddScoped<IBasicService<TrackRecord>, BasicService<TrackRecord>>();
+            services.AddScoped<IGenericReposirty<TrackRecord>, GenericRepositry<TrackRecord>>();
+
             //TODO: Support generic regestration later
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

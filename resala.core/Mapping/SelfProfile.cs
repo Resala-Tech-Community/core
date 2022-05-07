@@ -21,6 +21,9 @@ namespace resala.core.Mapping
 
             CreateMap<Tracker, Tracker>()
               .ForMember(src => src.Id, opt => opt.Ignore());
+
+            CreateMap<TrackRecord, TrackRecord>()
+             .ForMember(src => src.Id, opt => opt.Ignore());
         }
     }
 }

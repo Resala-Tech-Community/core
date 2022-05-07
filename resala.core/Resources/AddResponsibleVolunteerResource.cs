@@ -21,7 +21,7 @@ namespace resala.core.Resources
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Required")]
-        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        [ValidTimestamp(ErrorMessage = "Invalid date of birth")]
         public string DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Required")]
@@ -79,45 +79,45 @@ namespace resala.core.Resources
 
         public string GraduationGroupNumber { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        [ValidTimestamp(ErrorMessage = "Invalid date of birth")]
         public string GraduationDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public bool IsOmraWinner { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        [ValidTimestamp(ErrorMessage = "Invalid date of birth")]
         public string OmraWinDate { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        [ValidTimestamp(ErrorMessage = "Invalid date of birth")]
         public string OmraTravelDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public bool IsMiniCampQualifed { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        [ValidTimestamp(ErrorMessage = "Invalid date of birth")]
         public string MiniCampQualificationDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public bool IsLeadersCampQualifed { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        [ValidTimestamp(ErrorMessage = "Invalid date of birth")]
         public string LeadersCampQualificationDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public bool IsDrMeetingQualifed { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        [ValidTimestamp(ErrorMessage = "Invalid date of birth")]
         public string DrMeetingQualificationDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         public bool IsGraduationInterviewQualifed { get; set; }
 
-        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        [ValidTimestamp(ErrorMessage = "Invalid date of birth")]
         public string GraduationInterviewQualificationDate { get; set; }
 
 
         [Required(ErrorMessage = "Required")]
-        [ValidPastDate(ErrorMessage = "Invalid date of birth")]
+        [ValidTimestamp(ErrorMessage = "Invalid date of birth")]
         public string ActivityJoinDate { get; set; }
 
         public string JoiningObjectives { get; set; }

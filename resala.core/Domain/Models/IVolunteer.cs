@@ -23,7 +23,7 @@ namespace resala.core.Domain.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Required")]
-        [ValidPastDate(ErrorMessage ="Invalid date of birth")]
+        [ValidTimestamp(ErrorMessage ="Invalid date of birth")]
         public DateTime? DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Required")]

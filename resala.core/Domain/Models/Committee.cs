@@ -16,5 +16,7 @@ namespace resala.core.Domain.Models
         public ushort MaleCapacity { get; set; }
         public ushort FemaleCapacity { get; set; }
         public ushort UniSexCapacity { get; set; }
+
+        public CommitteeType CommitteeType { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace resala.core.Validation.Attributes
 {
-    public class ValidPastDateAttribute : ValidationAttribute
+    public class ValidTimestampAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)
         {

@@ -15,7 +15,10 @@ namespace resala.core.Resources
 
         public string Description { get; set; }
 
-        public string RequiredInfo { get; set; }
+        public string RequiredInfoHint { get; set; }
+
+        public int RecordPeriodDays { get; set; }
+
     }
 
 }

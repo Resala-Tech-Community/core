@@ -18,8 +18,11 @@ namespace resala.core.Domain.Models
         [MaxLength(50)]
         public string Description { get; set; }
 
-        [Required]
         [MaxLength(20)]
-        public string RequiredInfo { get; set; }
+        public string RequiredInfoHint { get; set; }
+
+        [Range(0, 30)]
+        public int RecordPeriodDays { get; set; }
+
     }
 }

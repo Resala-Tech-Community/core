@@ -1,4 +1,5 @@
-﻿using System;
+﻿using resala.core.Domain.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace resala.core.Resources
@@ -20,5 +21,8 @@ namespace resala.core.Resources
         [Required]
         [Range(0, 5)]
         public ushort UniSexCapacity { get; set; }
+
+        public string CommitteeType { get; set; } = Domain.Models.CommitteeType.Branches.ToString();
+
     }
 }

@@ -19,6 +19,9 @@ namespace resala.core.Resources
         public string Description { get; set; }
 
         [MaxLength(20)]
-        public string RequiredInfo { get; set; } = "No Required Info";
+        public string RequiredInfoHint { get; set; } = "No Required Info";
+
+        [Range(0, 30)]
+        public int RecordPeriodDays { get; set; } = 3;
     }
 }

@@ -11,10 +11,16 @@ namespace resala.core.Mapping
         {
             CreateMap<AddBranchResource, Branch>();
             CreateMap<AddActivityResource, Activity>();
-            CreateMap<AddCommitteeResource, Committee>();
+            CreateMap<AddCommitteeResource, Committee>()
+                .ForMember(src => src.CommitteeType, opt => opt.MapFrom(src => Enum.Parse(typeof(CommitteeType), src.CommitteeType)));
+
 
             CreateMap<AddTrackerResource, Tracker>()
                 .ForMember(src => src.Location , opt => opt.MapFrom(src => Enum.Parse(typeof(TrackerLocation), src.Location)));
+
+            CreateMap<AddTrackRecordResource, TrackRecord>()
+                .ForMember(src => src.AttendedDate, opt => opt.MapFrom(src => DateTime.Parse(src.AttendedDate)));
+
 
             CreateMap<AddResponsibleVolunteerResource, ResponsibleVolunteer>()
               .ForMember(src => src.Gender, opt => opt.MapFrom(src => Enum.Parse(typeof(Gender),src.Gender)))
