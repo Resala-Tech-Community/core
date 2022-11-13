@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using resala.core.Domain.Models;
 using resala.core.Domain.Repositories;
 using resala.core.Domain.Services;
+using resala.core.Identity;
 using resala.core.Persistence.Contexts;
 using resala.core.Persistence.Repositories;
 using resala.core.Services;
@@ -39,9 +41,15 @@ namespace resala.core
             services.AddDbContext<AppDbContext>();
 
 
+            // Identity //
+
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+
+
             services.AddScoped<IVolunteerService, VolunteerService>();
-            services.AddScoped<IBasicService<ResponsibleVolunteer>, BasicService<ResponsibleVolunteer>>();
-            services.AddScoped<IGenericReposirty<ResponsibleVolunteer>, GenericRepositry<ResponsibleVolunteer>>();
+            services.AddScoped<IBasicService<MemberVolunteer>, BasicService<MemberVolunteer>>();
+            services.AddScoped<IGenericReposirty<MemberVolunteer>, GenericRepositry<MemberVolunteer>>();
 
 
 
@@ -88,6 +96,7 @@ namespace resala.core
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

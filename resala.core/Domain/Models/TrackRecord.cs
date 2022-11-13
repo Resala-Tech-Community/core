@@ -25,7 +25,7 @@ namespace resala.core.Domain.Models
 
         [Required]
         public int? ResponsibleVolunteerId { get; set; }
-        public virtual ResponsibleVolunteer Volunteer { get; set; }
+        public virtual MemberVolunteer Volunteer { get; set; }
 
         [Required]
         public int? TrackerId { get; set; }

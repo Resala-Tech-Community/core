@@ -7,7 +7,7 @@ namespace resala.core.Mapping
     {
         public SelfProfile()
         {
-            CreateMap<ResponsibleVolunteer, ResponsibleVolunteer>()
+            CreateMap<MemberVolunteer, MemberVolunteer>()
                .ForMember(src => src.Id, opt => opt.Ignore());
 
             CreateMap<Activity, Activity>()

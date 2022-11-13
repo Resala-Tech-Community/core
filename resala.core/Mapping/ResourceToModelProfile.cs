@@ -22,7 +22,7 @@ namespace resala.core.Mapping
                 .ForMember(src => src.AttendedDate, opt => opt.MapFrom(src => DateTime.Parse(src.AttendedDate)));
 
 
-            CreateMap<AddResponsibleVolunteerResource, ResponsibleVolunteer>()
+            CreateMap<AddResponsibleVolunteerResource, MemberVolunteer>()
               .ForMember(src => src.Gender, opt => opt.MapFrom(src => Enum.Parse(typeof(Gender),src.Gender)))
               .ForMember(src => src.DateOfBirth, opt => opt.MapFrom(src => DateTime.Parse(src.DateOfBirth)))
               .ForMember(src => src.GraduationDate, opt => { opt.Condition(src => !string.IsNullOrEmpty(src.GraduationDate)); opt.MapFrom(src => DateTime.Parse(src.GraduationDate)); })

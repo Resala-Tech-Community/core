@@ -4,6 +4,6 @@ namespace resala.core.Domain.Services
 {
     public interface IVolunteerService
     {
-        public IBasicService<ResponsibleVolunteer> BasicService { get; set; }
+        public IBasicService<MemberVolunteer> BasicService { get; set; }
     }
 }

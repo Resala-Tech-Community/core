@@ -13,11 +13,11 @@ namespace resala.core.Services
 {
     public class VolunteerService : IVolunteerService
     {
-        public IBasicService<ResponsibleVolunteer> BasicService { get; set; }
+        public IBasicService<MemberVolunteer> BasicService { get; set; }
 
 
 
-        public VolunteerService(IBasicService<ResponsibleVolunteer> basicService)
+        public VolunteerService(IBasicService<MemberVolunteer> basicService)
         {
             BasicService = basicService;
         }

@@ -1,31 +1,38 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using resala.core.Domain.Models;
+using resala.core.Identity;
 using System.Reflection;
 
 namespace resala.core.Persistence.Contexts
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
 
         public DbSet<Tracker> Trackers { get; set; }
         public DbSet<TrackRecord> TrackRecords { get; set; }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Committee> Committees { get; set; }
-        public DbSet<ResponsibleVolunteer> ResponsibleVolunteers { get; set; }
+        public DbSet<MemberVolunteer> ResponsibleVolunteers { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        private IConfiguration _Configuration { get; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration) : base(options)
         {
-
+            _Configuration = configuration;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlite("Filename=TestDatabase.db", options =>
-            {
-                options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-            });
+            //optionsBuilder.UseSqlite("Filename=TestDatabase.db", options =>
+            //{
+            //    options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+            //});
+
+            optionsBuilder.UseSqlServer(_Configuration.GetConnectionString("LocalDB"));
 
             optionsBuilder.UseLazyLoadingProxies();
         }
@@ -69,9 +76,9 @@ namespace resala.core.Persistence.Contexts
 
 
 
-            builder.Entity<ResponsibleVolunteer>().HasData
+            builder.Entity<MemberVolunteer>().HasData
                 (
-                    new ResponsibleVolunteer
+                    new MemberVolunteer
                     {
                         Id = 100,
                         Name = "TestUser0",

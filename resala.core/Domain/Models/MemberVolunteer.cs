@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace resala.core.Domain.Models
 {
-    public class ResponsibleVolunteer : IVolunteer
+    public class MemberVolunteer : IVolunteer
     {
 
-        public ResponsibleVolunteer()
+        public MemberVolunteer()
         {
             VolunteerType = VolunteerType.Member;
         }

@@ -7,7 +7,7 @@ using resala.core.Resources;
 namespace resala.core.Controllers
 {
     [Route("/api/[controller]")]
-    public class VolunteersController : IBasicController<ResponsibleVolunteer, ResponsibleVolunteerResource, AddResponsibleVolunteerResource>
+    public class VolunteersController : IBasicController<MemberVolunteer, ResponsibleVolunteerResource, AddResponsibleVolunteerResource>
     {
         private readonly IVolunteerService _volunteerService;
 
